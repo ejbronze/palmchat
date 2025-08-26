@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PalmChat Innovations LLC — Expert Consulting for CS Education & Professional Development</title>
+  <meta name="description" content="PalmChat Innovations LLC helps schools design CS curriculum, train teachers, and integrate AI. NYC based. Bilingual support." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B4%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0b132b;
+      --ink: #e6f1ff;
+      --muted: #b7c4e0;
+      --accent: #00c2a8;
+      --card: #111a34;
+      --ring: rgba(0, 194, 168, 0.25);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background: radial-gradient(1200px 600px at 10% -10%, #17315d 0%, transparent 50%), radial-gradient(800px 600px at 90% 10%, #0e3945 0%, transparent 50%), var(--bg); color: var(--ink); line-height: 1.5; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 12px 0 8px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #7cf7e4); color: #052f2a; font-size: 28px; font-weight: 700; }
+    .brand h1 { font-size: 18px; margin: 0; letter-spacing: 0.2px; }
+    .nav a { margin-left: 16px; opacity: 0.9; }
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: 56px 0; }
+    .hero h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 0 0 12px; }
+    .hero p { margin: 0 0 18px; color: var(--muted); }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #073a34; padding: 12px 18px; border-radius: 12px; font-weight: 700; border: 2px solid transparent; }
+    .cta:hover { filter: brightness(1.05); text-decoration: none; box-shadow: 0 0 0 6px var(--ring); }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pill { display: inline-block; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(124, 247, 228, 0.12); color: #9cf5e7; border: 1px solid rgba(124, 247, 228, 0.25); }
+    .section { padding: 36px 0; }
+    .muted { color: var(--muted); }
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 0 50px; margin-top: 28px; }
+    .leaves { position: relative; isolation: isolate; }
+    .leaves::before { content: ""; position: absolute; inset: -20px; background: radial-gradient(1000px 400px at 20% 0%, rgba(0, 194, 168, 0.15), transparent 40%), radial-gradient(900px 400px at 100% 0%, rgba(124, 247, 228, 0.10), transparent 40%); z-index: -1; filter: blur(8px); }
+    .kicker { font-size: 13px; letter-spacing: 0.4px; text-transform: uppercase; color: #a0ffe9; }
+    .lang { font-size: 12px; opacity: 0.8; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: 1fr; } .nav { display:none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🌴</div>
+        <div>
+          <h1>PalmChat Innovations LLC</h1>
+          <div class="lang">Bilingual • English · Español · Português</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero leaves">
+      <div>
+        <div class="kicker">Education Consulting</div>
+        <h2>Expert consulting for CS education and professional development</h2>
+        <p class="muted">We help schools design CS curriculum, train teachers, and integrate AI with care. Strategic planning, PD, and coaching for sustainable programs.</p>
+        <div style="display:flex; gap:12px; margin-top:14px; flex-wrap: wrap;">
+          <a class="cta" href="#contact">Book a consult</a>
+          <a class="cta" style="background:transparent; color:var(--ink); border-color: rgba(255,255,255,0.18);" href="#services">See services</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Highlights">
+        <div class="pill">Focus areas</div>
+        <ul>
+          <li>CS curriculum development K–12</li>
+          <li>Teacher PD and coaching</li>
+          <li>CT integration in ELA and Math</li>
+          <li>AI literacy and emerging tools</li>
+          <li>SPED and SEL aligned approaches</li>
+        </ul>
+        <p class="muted" style="margin-top:12px">NYC based. Remote friendly.</p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <h3>Services</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h4>CS Curriculum Design</h4>
+          <p class="muted">Scope and sequence, units, and turn‑key lessons that fit your context. Bilingual options available.</p>
+        </div>
+        <div class="card">
+          <h4>Professional Development</h4>
+          <p class="muted">Hands‑on workshops, virtual series, and coaching cycles that build teacher confidence.</p>
+        </div>
+        <div class="card">
+          <h4>Program Strategy</h4>
+          <p class="muted">Roadmaps for sustainable CS programs, metrics, and stakeholder alignment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h3>About</h3>
+      <p class="muted">PalmChat Innovations LLC partners with schools and organizations to make computer science learning joyful, rigorous, and inclusive. We bring expertise in CS pedagogy, teacher coaching, and AI integration. Founded by Edwin R. Jaquez.</p>
+      <p class="muted"><strong>Tagline en español:</strong> Consultoría experta en educación informática y desarrollo profesional.</p>
+    </section>
+
+    <section id="contact" class="section">
+      <h3>Contact</h3>
+      <div class="card">
+        <p class="muted">Email <a href="mailto:ejaquez@palmchat.io">ejaquez@palmchat.io</a> to start a conversation or request a proposal. You can also follow updates at <a href="https://www.linkedin.com/in/edwinrjaquez" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="muted">© <span id="y"></span> PalmChat Innovations LLC • NYC · DR</div>
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
