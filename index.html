@@ -44,6 +44,7 @@
       width: 44px;
       height: auto;
       display: block;
+      filter: invert(1) brightness(200%); /* makes logo white */
     }
     .brand h1 { font-size: 18px; margin: 0; letter-spacing: 0.2px; }
     .nav a { margin-left: 16px; opacity: 0.9; }
@@ -63,6 +64,7 @@
       background: var(--accent); color: #073a34;
       padding: 12px 18px; border-radius: 12px;
       font-weight: 700; border: 2px solid transparent;
+      cursor: pointer;
     }
     .cta:hover { filter: brightness(1.05); text-decoration: none; box-shadow: 0 0 0 6px var(--ring); }
 
@@ -86,6 +88,14 @@
       width: 36px; height: auto;
       filter: invert(1) brightness(200%);
     }
+
+    /* Contact Form */
+    form label { display:block; margin: 8px 0 4px; }
+    form input, form textarea {
+      width: 100%; padding: 10px; border-radius: 8px;
+      border: 1px solid #ccc; font-size: 14px;
+    }
+    #formStatus { margin-top: 10px; font-size: 14px; color: var(--muted); }
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -166,7 +176,22 @@
     <section id="contact" class="section">
       <h3>Contact</h3>
       <div class="card">
-        <p class="muted">Email <a href="mailto:ejaquez@palmchat.io">ejaquez@palmchat.io</a> or follow us on <a href="https://www.linkedin.com/company/palmchat-innovations-llc" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          
+          <input type="hidden" name="_subject" value="New inquiry from PalmChat.io" />
+          <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
+          
+          <button type="submit" class="cta">Send</button>
+          <p id="formStatus"></p>
+        </form>
       </div>
     </section>
 
@@ -177,6 +202,31 @@
       </div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Contact form handler
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusEl.textContent = 'Sending…';
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) {
+            statusEl.textContent = '✅ Thanks! Your message was sent.';
+            form.reset();
+          } else {
+            statusEl.textContent = '⚠️ Something went wrong. Try again or email ejaquez@palmchat.io.';
+          }
+        } catch (err) {
+          statusEl.textContent = '❌ Network error. Please try again later.';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
