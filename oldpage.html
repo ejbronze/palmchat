@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PalmChat Innovations LLC — Expert Consulting for CS Education & Professional Development</title>
   <meta name="description" content="PalmChat Innovations LLC helps schools design CS curriculum, train teachers, and integrate AI. NYC based. Bilingual support." />
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <style>
     :root {
@@ -18,81 +17,31 @@
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% -10%, #17315d 0%, transparent 50%),
-                  radial-gradient(800px 600px at 90% 10%, #0e3945 0%, transparent 50%),
-                  var(--bg);
-      color: var(--ink);
-      line-height: 1.5;
-    }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background: radial-gradient(1200px 600px at 10% -10%, #17315d 0%, transparent 50%), radial-gradient(800px 600px at 90% 10%, #0e3945 0%, transparent 50%), var(--bg); color: var(--ink); line-height: 1.5; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-    /* Header */
-    header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 12px 0 8px;
-    }
+    header { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 12px 0 8px; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand .logo img {
-      width: 44px;
-      height: auto;
-      display: block;
-    }
+    .logo { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #7cf7e4); color: #052f2a; font-size: 28px; font-weight: 700; }
     .brand h1 { font-size: 18px; margin: 0; letter-spacing: 0.2px; }
     .nav a { margin-left: 16px; opacity: 0.9; }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      align-items: center;
-      padding: 56px 0;
-    }
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: 56px 0; }
     .hero h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 0 0 12px; }
     .hero p { margin: 0 0 18px; color: var(--muted); }
-    .cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #073a34;
-      padding: 12px 18px; border-radius: 12px;
-      font-weight: 700; border: 2px solid transparent;
-    }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #073a34; padding: 12px 18px; border-radius: 12px; font-weight: 700; border: 2px solid transparent; }
     .cta:hover { filter: brightness(1.05); text-decoration: none; box-shadow: 0 0 0 6px var(--ring); }
-
-    /* Sections */
-    .section { padding: 36px 0; }
     .card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pill { display: inline-block; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(124, 247, 228, 0.12); color: #9cf5e7; border: 1px solid rgba(124, 247, 228, 0.25); }
+    .section { padding: 36px 0; }
     .muted { color: var(--muted); }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 28px 0 50px;
-      margin-top: 28px;
-    }
-    footer .footer-brand {
-      display:flex; align-items:center; gap:10px;
-      color: var(--muted);
-    }
-    footer .footer-brand img {
-      width: 36px; height: auto;
-      filter: invert(1) brightness(200%);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .nav { display:none; }
-    }
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 0 50px; margin-top: 28px; }
+    .leaves { position: relative; isolation: isolate; }
+    .leaves::before { content: ""; position: absolute; inset: -20px; background: radial-gradient(1000px 400px at 20% 0%, rgba(0, 194, 168, 0.15), transparent 40%), radial-gradient(900px 400px at 100% 0%, rgba(124, 247, 228, 0.10), transparent 40%); z-index: -1; filter: blur(8px); }
+    .kicker { font-size: 13px; letter-spacing: 0.4px; text-transform: uppercase; color: #a0ffe9; }
+    .lang { font-size: 12px; opacity: 0.8; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: 1fr; } .nav { display:none; } }
   </style>
 </head>
 <body>
@@ -100,8 +49,9 @@
     <header>
       <div class="brand">
         <div class="logo">
-          <img src="assets/palmchat-logo.png" alt="PalmChat Innovations Logo" />
+          <img src="assets/palmchat-logo.png" alt="PalmChat Innovations Logo" style="width:44px; height:auto;" />
         </div>
+
         <div>
           <h1>PalmChat Innovations LLC</h1>
           <div class="lang">Bilingual • English · Español</div>
@@ -142,11 +92,11 @@
       <div class="grid-3">
         <div class="card">
           <h4>CS Curriculum Design</h4>
-          <p class="muted">Scope and sequence, units, and turn-key lessons that fit your context. Bilingual options available.</p>
+          <p class="muted">Scope and sequence, units, and turn‑key lessons that fit your context. Bilingual options available.</p>
         </div>
         <div class="card">
           <h4>Professional Development</h4>
-          <p class="muted">Hands-on workshops, virtual series, and coaching cycles that build teacher confidence.</p>
+          <p class="muted">Hands‑on workshops, virtual series, and coaching cycles that build teacher confidence.</p>
         </div>
         <div class="card">
           <h4>Program Strategy</h4>
@@ -169,9 +119,9 @@
     </section>
 
     <footer>
-      <div class="footer-brand">
-        <img src="assets/palmchat-logo.png" alt="PalmChat Logo" />
-        © <span id="y"></span> PalmChat Innovations LLC • NYC
+      <div style="display:flex; align-items:center; gap:10px;" class="muted">
+        <img src="assets/palmchat-logo.png" alt="PalmChat Logo" style="width:36px; height:auto; filter: invert(1);" />
+    ©   <span id="y"></span> PalmChat Innovations LLC • NYC
       </div>
     </footer>
   </div>
