@@ -7,7 +7,7 @@ This site uses intentional temporary placeholders until approved production asse
 - [ ] Approved founder portrait for Edwin Jaquez
 - [ ] Official horizontal, stacked, light-background, and dark-background logo variations
 - [ ] Source SVG version of the official palm-and-bird logo
-- [ ] Approved project-cover graphics or photography for all five featured projects
+- [ ] Approved replacements for the five temporary SVG project-cover graphics
 - [ ] PIKAS screenshots cleared for public use and scrubbed of student/private data
 - [ ] Workshop and facilitation photography with usage permission
 - [ ] Current capabilities statement
@@ -21,7 +21,7 @@ This site uses intentional temporary placeholders until approved production asse
 ## Temporary assets currently in use
 
 - Founder: HTML/CSS “EJ” editorial profile placeholder in `index.html`
-- Project covers: five HTML/CSS branded cover motifs in `index.html` and `styles.css`
+- Project covers: five temporary, project-specific SVGs in `assets/projects/`
 - Social preview: `assets/social/palmchat-social-preview.jpg`
 - Logo and favicon copies: `assets/brand/`
 

@@ -1,88 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-year]').forEach((node) => { node.textContent = new Date().getFullYear(); });
+
   const header = document.querySelector('.site-header');
-  const navToggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('.site-nav');
-  const backToTop = document.querySelector('.back-to-top');
-  const year = document.getElementById('year');
-
-  if (year) year.textContent = new Date().getFullYear();
-
-  const closeMenu = () => {
-    if (!navToggle || !header) return;
-    navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open navigation menu');
-    header.classList.remove('is-open');
+  const menuButton = document.querySelector('.menu-button');
+  const menu = document.getElementById('site-nav');
+  const closeMenu = ({ focus = false } = {}) => {
+    header?.classList.remove('menu-open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.querySelector('b')?.replaceChildren('Menu');
+    if (focus) menuButton?.focus();
   };
-
-  navToggle?.addEventListener('click', () => {
-    const open = navToggle.getAttribute('aria-expanded') !== 'true';
-    navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-    header?.classList.toggle('is-open', open);
+  menuButton?.addEventListener('click', () => {
+    const open = menuButton.getAttribute('aria-expanded') !== 'true';
+    header?.classList.toggle('menu-open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.querySelector('b')?.replaceChildren(open ? 'Close' : 'Menu');
   });
-  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu()));
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && header?.classList.contains('is-open')) {
-      closeMenu();
-      navToggle?.focus();
-    }
+    if (event.key === 'Escape' && header?.classList.contains('menu-open')) closeMenu({ focus: true });
   });
-
-  const updateTopButton = () => backToTop?.classList.toggle('is-visible', window.scrollY > 600);
-  updateTopButton();
-  window.addEventListener('scroll', updateTopButton, { passive: true });
-  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  const filterButtons = [...document.querySelectorAll('.filter-btn')];
-  const caseCards = [...document.querySelectorAll('.case-card')];
-  const filterStatus = document.getElementById('filterStatus');
-  filterButtons.forEach((button) => button.addEventListener('click', () => {
-    const filter = button.dataset.filter || 'all';
-    let visible = 0;
-    filterButtons.forEach((item) => {
-      const active = item === button;
-      item.classList.toggle('is-active', active);
-      item.setAttribute('aria-pressed', String(active));
-    });
-    caseCards.forEach((card) => {
-      const matches = filter === 'all' || (card.dataset.category || '').split(' ').includes(filter);
-      card.hidden = !matches;
-      if (!matches) card.open = false;
-      if (matches) visible += 1;
-    });
-    if (filterStatus) filterStatus.textContent = filter === 'all' ? `Showing all ${visible} projects.` : `Showing ${visible} ${button.textContent} ${visible === 1 ? 'project' : 'projects'}.`;
-  }));
+  window.addEventListener('resize', () => { if (window.innerWidth > 1000) closeMenu(); });
 
   const form = document.getElementById('contactForm');
   if (!form) return;
   const submitButton = document.getElementById('submitButton');
   const status = document.getElementById('formStatus');
-  const fields = [...form.querySelectorAll('input[required], select[required], textarea[required]')];
+  const fields = [...form.querySelectorAll('input[required],select[required],textarea[required]')];
   const messages = {
     name: 'Please enter your name.', organization: 'Please enter your organization.', role: 'Please share your role.',
-    email: 'Please enter a valid email address.', inquiry: 'Please choose an area of support.', timeline: 'Please choose an approximate timeline.',
+    email: 'Please enter a valid email address.', inquiry: 'Please choose an area of interest.', timeline: 'Please choose an approximate timeline.',
     message: 'Please share at least 20 characters about your goals or context.'
   };
-
-  const validateField = (field) => {
+  if (new URLSearchParams(location.search).get('interest') === 'updates') {
+    const inquiry = document.getElementById('inquiry');
+    if (inquiry) inquiry.value = 'Something else';
+    const message = document.getElementById('message');
+    if (message) message.value = 'Please keep me informed when PalmChat resources become available.';
+  }
+  const validate = (field) => {
     let valid = field.checkValidity();
     if (field.id === 'message') valid = field.value.trim().length >= 20;
-    if (['name', 'organization', 'role'].includes(field.id)) valid = field.value.trim().length >= 2;
+    if (['name','organization','role'].includes(field.id)) valid = field.value.trim().length >= 2;
     field.setAttribute('aria-invalid', String(!valid));
     const error = document.getElementById(`${field.id}Error`);
     if (error) error.textContent = valid ? '' : messages[field.id];
     return valid;
   };
   fields.forEach((field) => {
-    field.addEventListener('blur', () => validateField(field));
-    field.addEventListener('input', () => {
-      if (field.getAttribute('aria-invalid') === 'true') validateField(field);
-    });
-    field.addEventListener('change', () => {
-      if (field.getAttribute('aria-invalid') === 'true') validateField(field);
-    });
+    field.addEventListener('blur', () => validate(field));
+    field.addEventListener('input', () => { if (field.getAttribute('aria-invalid') === 'true') validate(field); });
+    field.addEventListener('change', () => { if (field.getAttribute('aria-invalid') === 'true') validate(field); });
   });
-
   const setStatus = (message, type = '') => {
     if (!status) return;
     status.textContent = message;
@@ -91,13 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const setLoading = (loading) => {
     if (!submitButton) return;
     submitButton.disabled = loading;
-    submitButton.classList.toggle('is-loading', loading);
     submitButton.setAttribute('aria-busy', String(loading));
+    const labels = submitButton.querySelectorAll('span');
+    if (labels[0]) labels[0].hidden = loading;
+    if (labels[1]) labels[1].hidden = !loading;
   };
-
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const invalid = fields.filter((field) => !validateField(field));
+    const invalid = fields.filter((field) => !validate(field));
     if (invalid.length) {
       setStatus('Please review the highlighted fields before sending.', 'error');
       invalid[0].focus();

@@ -2,13 +2,23 @@
 
 The production website for PalmChat Innovations LLC, a founder-led education and learning design studio helping schools and education organizations build meaningful computer science, professional learning, curriculum, and AI integration experiences.
 
-The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It can deploy directly from the repository root to Vercel or GitHub Pages at [palmchat.io](https://palmchat.io/).
+The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It is a multi-page static site that deploys directly from the repository root to Vercel or GitHub Pages at [palmchat.io](https://palmchat.io/).
 
 ## Local development and preview
 
 Run `python3 -m http.server 8000` from the repository root, then open `http://localhost:8000`. There is no build step.
 
 Before publishing, check desktop, tablet, and mobile widths. Test the menu, all anchors, filters, service and case-study disclosure controls, form validation, keyboard focus, and reduced-motion behavior. Do not send a live Formspree submission during routine testing; mock `fetch` when checking success and error states.
+
+### Page generation
+
+Shared page chrome and structured service/project content live in `scripts/build-pages.mjs`. After editing that source, regenerate the checked-in static pages with:
+
+```bash
+node scripts/build-pages.mjs
+```
+
+The generated HTML files must remain committed so direct navigation and refreshes work without server-side routing. Edit `styles.css` and `script.js` directly; the generator does not overwrite them.
 
 ## GitHub Pages deployment
 
@@ -44,17 +54,31 @@ assets/
 
 Legacy root-level logo and favicon files remain for compatibility. New references use `assets/brand/`. Temporary placeholders are documented in [ASSET_CHECKLIST.md](ASSET_CHECKLIST.md). To add a real founder portrait, place an optimized image in `assets/images/`, replace `.portrait-placeholder` in `index.html`, and add accurate alt text.
 
+## Site map
+
+- `/` — concise homepage
+- `/services/` and four service detail pages
+- `/work/` and five dedicated case-study pages
+- `/about/`
+- `/resources/`
+- `/contact/`
+- `/privacy.html`
+
+All page and asset links are root-relative for reliable navigation from nested pages on the custom domain.
+
 ## Adding a case study
 
-Copy a `.case-card` details block in `index.html`, then update its filter slugs, cover title and class, summary, Challenge, PalmChat role, Approach, Deliverables, Tools or methods, Intended impact, and any confidentiality note. Use careful language such as “designed to support” when verified outcomes are unavailable. Never invent statistics, logos, testimonials, partnerships, or outcomes.
+Add a project record to the `projects` array in `scripts/build-pages.mjs`, add its SVG cover under `assets/projects/`, and regenerate the pages. Include Context, Challenge, PalmChat role, Approach, Deliverables, Tools or methods, Intended impact, related work, and any confidentiality note. Use careful language such as “designed to support” when verified outcomes are unavailable. Never invent statistics, logos, testimonials, partnerships, or outcomes.
 
 ## Updating services
 
-Service content lives in the `.service-card` elements in `index.html`. Keep summaries concise and preserve native `details`/`summary` markup for keyboard and no-JavaScript access.
+Service content lives in the `services` array in `scripts/build-pages.mjs`. Regenerate after editing and check both the service index and detail pages.
 
 ## Contact form
 
-The form posts to `https://formspree.io/f/mjkezvrd`. To change the endpoint, update only the form `action` in `index.html`. `script.js` validates fields, sets `aria-invalid`, handles loading and network/server failures, resets after success, and uses an `aria-live` status. Keep the `_gotcha` honeypot and email fallback.
+The form posts to `https://formspree.io/f/mjkezvrd`. To change the endpoint, update the form source in `scripts/build-pages.mjs`, regenerate, and confirm the generated action in `contact/index.html`. `script.js` validates fields, sets `aria-invalid`, handles loading and network/server failures, resets after success, and uses an `aria-live` status. Keep the `_gotcha` honeypot and email fallback.
+
+The browser workflow has been verified with mocked successful and failed Formspree responses; no live inquiry was sent. In the Formspree dashboard, still confirm that the endpoint belongs to the correct account, delivers to the intended inbox, has appropriate spam controls, retains the expected submission history, and sends the desired email notifications.
 
 ## Accessibility checks
 
