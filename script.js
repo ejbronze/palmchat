@@ -1,199 +1,126 @@
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.site-header');
   const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = [...document.querySelectorAll('.nav-link')];
-  const sections = [...document.querySelectorAll('main section[id]')];
+  const nav = document.querySelector('.site-nav');
   const backToTop = document.querySelector('.back-to-top');
-  const filterButtons = [...document.querySelectorAll('.filter-btn')];
-  const caseStudies = [...document.querySelectorAll('.case-study')];
-  const yearNode = document.getElementById('year');
-  const form = document.getElementById('contactForm');
-  const statusEl = document.getElementById('formStatus');
-  const submitButton = document.getElementById('submitButton');
+  const year = document.getElementById('year');
 
-  if (yearNode) {
-    yearNode.textContent = new Date().getFullYear();
-  }
+  if (year) year.textContent = new Date().getFullYear();
 
-  if (navToggle) {
-    navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      if (header) header.classList.toggle('is-open', !expanded);
-    });
-
-    navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        navToggle.setAttribute('aria-expanded', 'false');
-        if (header) header.classList.remove('is-open');
-      });
-    });
-  }
-
-  const setActiveNav = () => {
-    const scrollY = window.scrollY + 120;
-    let currentId = sections[0]?.id || '';
-
-    sections.forEach((section) => {
-      if (scrollY >= section.offsetTop) {
-        currentId = section.id;
-      }
-    });
-
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute('href') === `#${currentId}`;
-      link.classList.toggle('is-active', isActive);
-      link.setAttribute('aria-current', isActive ? 'page' : 'false');
-    });
+  const closeMenu = () => {
+    if (!navToggle || !header) return;
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open navigation menu');
+    header.classList.remove('is-open');
   };
 
-  if (sections.length) {
-    setActiveNav();
-    window.addEventListener('scroll', setActiveNav, { passive: true });
-  }
+  navToggle?.addEventListener('click', () => {
+    const open = navToggle.getAttribute('aria-expanded') !== 'true';
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    header?.classList.toggle('is-open', open);
+  });
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && header?.classList.contains('is-open')) {
+      closeMenu();
+      navToggle?.focus();
+    }
+  });
 
-  if (backToTop) {
-    const toggleBackToTop = () => {
-      const shouldShow = window.scrollY > 420;
-      backToTop.classList.toggle('is-visible', shouldShow);
-    };
+  const updateTopButton = () => backToTop?.classList.toggle('is-visible', window.scrollY > 600);
+  updateTopButton();
+  window.addEventListener('scroll', updateTopButton, { passive: true });
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    toggleBackToTop();
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  const filterButtons = [...document.querySelectorAll('.filter-btn')];
+  const caseCards = [...document.querySelectorAll('.case-card')];
+  const filterStatus = document.getElementById('filterStatus');
+  filterButtons.forEach((button) => button.addEventListener('click', () => {
+    const filter = button.dataset.filter || 'all';
+    let visible = 0;
+    filterButtons.forEach((item) => {
+      const active = item === button;
+      item.classList.toggle('is-active', active);
+      item.setAttribute('aria-pressed', String(active));
     });
-  }
-
-  if (filterButtons.length && caseStudies.length) {
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const activeFilter = button.dataset.filter || 'all';
-
-        filterButtons.forEach((item) => {
-          item.classList.toggle('is-active', item === button);
-        });
-
-        caseStudies.forEach((study) => {
-          const categories = (study.dataset.category || '').split(' ');
-          const matches = activeFilter === 'all' || categories.includes(activeFilter);
-          study.hidden = !matches;
-        });
-      });
+    caseCards.forEach((card) => {
+      const matches = filter === 'all' || (card.dataset.category || '').split(' ').includes(filter);
+      card.hidden = !matches;
+      if (!matches) card.open = false;
+      if (matches) visible += 1;
     });
-  }
+    if (filterStatus) filterStatus.textContent = filter === 'all' ? `Showing all ${visible} projects.` : `Showing ${visible} ${button.textContent} ${visible === 1 ? 'project' : 'projects'}.`;
+  }));
 
-  if (form) {
-    const fields = {
-      name: form.querySelector('#name'),
-      organization: form.querySelector('#organization'),
-      role: form.querySelector('#role'),
-      email: form.querySelector('#email'),
-      timeline: form.querySelector('#timeline'),
-      message: form.querySelector('#message')
-    };
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const submitButton = document.getElementById('submitButton');
+  const status = document.getElementById('formStatus');
+  const fields = [...form.querySelectorAll('input[required], select[required], textarea[required]')];
+  const messages = {
+    name: 'Please enter your name.', organization: 'Please enter your organization.', role: 'Please share your role.',
+    email: 'Please enter a valid email address.', inquiry: 'Please choose an area of support.', timeline: 'Please choose an approximate timeline.',
+    message: 'Please share at least 20 characters about your goals or context.'
+  };
 
-    const validators = {
-      name: (value) => value.trim().length >= 2,
-      organization: (value) => value.trim().length >= 2,
-      role: (value) => value.trim().length >= 2,
-      email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
-      timeline: (value) => value.trim().length > 0,
-      message: (value) => value.trim().length >= 20
-    };
-
-    const setFieldState = (field, isValid) => {
-      if (field) field.setAttribute('aria-invalid', String(!isValid));
-    };
-
-    const validateFormFields = () => {
-      let allValid = true;
-      Object.entries(fields).forEach(([key, field]) => {
-        if (!field) return;
-        const isValid = validators[key] ? validators[key](field.value) : true;
-        setFieldState(field, !isValid);
-        if (!isValid) allValid = false;
-      });
-      return allValid;
-    };
-
-    const setStatus = (message, type) => {
-      if (!statusEl) return;
-      statusEl.textContent = message;
-      statusEl.className = 'form-status';
-      if (type) statusEl.classList.add(`is-${type}`);
-    };
-
-    Object.values(fields).forEach((field) => {
-      if (!field) return;
-      field.addEventListener('blur', () => {
-        const key = field.id;
-        if (!validators[key]) return;
-        const isValid = validators[key](field.value);
-        setFieldState(field, !isValid);
-
-        if (!isValid) {
-          const messageMap = {
-            name: 'Please enter your name.',
-            organization: 'Please enter your organization name.',
-            role: 'Please share your role.',
-            email: 'Please enter a valid email address.',
-            timeline: 'Please choose an approximate timeline.',
-            message: 'Please share a bit more detail so we can help.'
-          };
-          setStatus(messageMap[key], 'error');
-        } else if (statusEl && statusEl.classList.contains('is-error')) {
-          setStatus('', '');
-        }
-      });
+  const validateField = (field) => {
+    let valid = field.checkValidity();
+    if (field.id === 'message') valid = field.value.trim().length >= 20;
+    if (['name', 'organization', 'role'].includes(field.id)) valid = field.value.trim().length >= 2;
+    field.setAttribute('aria-invalid', String(!valid));
+    const error = document.getElementById(`${field.id}Error`);
+    if (error) error.textContent = valid ? '' : messages[field.id];
+    return valid;
+  };
+  fields.forEach((field) => {
+    field.addEventListener('blur', () => validateField(field));
+    field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') validateField(field);
     });
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const valid = validateFormFields();
-
-      if (!valid) {
-        setStatus('Please complete all required fields before sending your request.', 'error');
-        const firstInvalid = Object.values(fields).find((field) => field && field.getAttribute('aria-invalid') === 'true');
-        if (firstInvalid) firstInvalid.focus();
-        return;
-      }
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.classList.add('is-loading');
-      }
-
-      setStatus('Sending your inquiry…', 'loading');
-
-      try {
-        const data = new FormData(form);
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: {
-            Accept: 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          form.reset();
-          Object.values(fields).forEach((field) => {
-            if (field) field.setAttribute('aria-invalid', 'false');
-          });
-          setStatus('Thanks for reaching out. Your message has been sent, and PalmChat will follow up soon.', 'success');
-        } else {
-          throw new Error('Submission failed');
-        }
-      } catch (error) {
-        setStatus('Something went wrong while sending the form. Please email ejaquez@palmchat.io directly.', 'error');
-      } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.classList.remove('is-loading');
-        }
-      }
+    field.addEventListener('change', () => {
+      if (field.getAttribute('aria-invalid') === 'true') validateField(field);
     });
-  }
+  });
+
+  const setStatus = (message, type = '') => {
+    if (!status) return;
+    status.textContent = message;
+    status.className = `form-status${type ? ` ${type}` : ''}`;
+  };
+  const setLoading = (loading) => {
+    if (!submitButton) return;
+    submitButton.disabled = loading;
+    submitButton.classList.toggle('is-loading', loading);
+    submitButton.setAttribute('aria-busy', String(loading));
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const invalid = fields.filter((field) => !validateField(field));
+    if (invalid.length) {
+      setStatus('Please review the highlighted fields before sending.', 'error');
+      invalid[0].focus();
+      return;
+    }
+    if (form.querySelector('[name="_gotcha"]')?.value) {
+      form.reset();
+      setStatus('Thanks for reaching out. Your message has been sent. I’ll be in touch soon.', 'success');
+      return;
+    }
+    setLoading(true);
+    setStatus('Sending your inquiry…');
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
+      form.reset();
+      fields.forEach((field) => field.setAttribute('aria-invalid', 'false'));
+      setStatus('Thanks for reaching out. Your message has been sent. I’ll be in touch soon.', 'success');
+    } catch (error) {
+      console.error('Contact form submission failed:', error);
+      setStatus('Your message could not be sent. Please try again or email ejaquez@palmchat.io.', 'error');
+    } finally {
+      setLoading(false);
+    }
+  });
 });

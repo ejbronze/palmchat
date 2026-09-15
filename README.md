@@ -1,116 +1,63 @@
 # PalmChat Innovations
 
-PalmChat Innovations is a small education consulting and learning design studio focused on helping schools, education organizations, and learning teams turn emerging technology and instructional strategy into practical, high-impact teaching and learning experiences.
+The production website for PalmChat Innovations LLC, a founder-led education and learning design studio helping schools and education organizations build meaningful computer science, professional learning, curriculum, and AI integration experiences.
 
-## Project overview
+The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It deploys from the repository root to GitHub Pages at [palmchat.io](https://palmchat.io/).
 
-This repository hosts the PalmChat Innovations website, designed to be lightweight, accessible, and fully compatible with GitHub Pages. The site is built with plain HTML, CSS, and JavaScript so it remains fast to load and easy to maintain without a framework.
+## Local development and preview
 
-The current website is a single-page experience with clear sections for:
+Run `python3 -m http.server 8000` from the repository root, then open `http://localhost:8000`. There is no build step.
 
-- Home
-- Services
-- Work / Case Studies
-- About Edwin
-- Resources
-- Contact
+Before publishing, check desktop, tablet, and mobile widths. Test the menu, all anchors, filters, service and case-study disclosure controls, form validation, keyboard focus, and reduced-motion behavior. Do not send a live Formspree submission during routine testing; mock `fetch` when checking success and error states.
 
-The branding centers on deep navy, palm green/teal accents, warm cream backgrounds, and editorial typography to communicate a strategic, credible, and approachable education consultancy.
+## GitHub Pages deployment
 
-## Local development
+1. Keep Pages pointed at the repository root on the publishing branch.
+2. Keep `CNAME` unchanged with the single value `palmchat.io`.
+3. Commit and push only after review and approval.
+4. Confirm the Pages deployment, then check HTTPS, metadata, asset paths, and the console.
 
-To preview the site locally:
+DNS is managed outside this repository and must not be changed during website updates.
 
-1. Open a terminal in this project folder.
-2. Run a local web server:
-   ```bash
-   python3 -m http.server 8000
-   ```
-3. Visit http://localhost:8000
+## Asset structure
 
-## Previewing before deployment
+```text
+assets/
+  brand/     Official logo and favicon copies
+  icons/     Reusable local icons
+  images/    Founder and editorial photography
+  projects/  Approved project covers and screenshots
+  social/    Open Graph and social-preview assets
+```
 
-Because this repository is intended for GitHub Pages, the simplest preview path is to serve the repository root locally and review the page in a browser. The site is static, so there is no build step required.
+Legacy root-level logo and favicon files remain for compatibility. New references use `assets/brand/`. Temporary placeholders are documented in [ASSET_CHECKLIST.md](ASSET_CHECKLIST.md). To add a real founder portrait, place an optimized image in `assets/images/`, replace `.portrait-placeholder` in `index.html`, and add accurate alt text.
 
-## Deployment through GitHub Pages
+## Adding a case study
 
-1. In the GitHub repository, open Settings.
-2. Navigate to Pages.
-3. Set the source to the default branch (for example, `main`).
-4. Keep the root folder selected if the site is served from the repository root.
-5. Confirm that the CNAME file remains `palmchat.io`.
-6. Save the settings and allow GitHub Pages to publish.
+Copy a `.case-card` details block in `index.html`, then update its filter slugs, cover title and class, summary, Challenge, PalmChat role, Approach, Deliverables, Tools or methods, Intended impact, and any confidentiality note. Use careful language such as “designed to support” when verified outcomes are unavailable. Never invent statistics, logos, testimonials, partnerships, or outcomes.
 
-## Asset guidelines
+## Updating services
 
-- Preserve the existing PalmChat logo unless there is a strong reason to replace it.
-- Keep assets in the root `assets/` folder for simplicity and GitHub Pages compatibility.
-- If additional branded assets are created, prefer organized folders such as `assets/brand`, `assets/icons`, `assets/images`, and `assets/social`.
-- Do not add fake or misleading testimonials, logos, or performance claims.
-- Use the PNG logo as the fallback asset while keeping the site lightweight.
+Service content lives in the `.service-card` elements in `index.html`. Keep summaries concise and preserve native `details`/`summary` markup for keyboard and no-JavaScript access.
 
-## Brand usage guidance
+## Contact form
 
-- Maintain the PalmChat name and identity as the primary visual anchor.
-- Use the warm cream and navy palette to keep the site polished and credible.
-- Use accent color sparingly and only to highlight actions or key points.
-- Keep adoption of AI or emerging technology practical and grounded in educational outcomes, not hype.
-- Avoid overly literal Caribbean imagery or generalized stock-photo design patterns.
+The form posts to `https://formspree.io/f/mjkezvrd`. To change the endpoint, update only the form `action` in `index.html`. `script.js` validates fields, sets `aria-invalid`, handles loading and network/server failures, resets after success, and uses an `aria-live` status. Keep the `_gotcha` honeypot and email fallback.
 
-## Updating case studies
+## Accessibility checks
 
-To update the Work section, edit the relevant `details` elements in `index.html`.
+- Confirm one H1 and logical headings.
+- Navigate every control by keyboard and verify visible focus.
+- Check mobile-menu Escape behavior and disclosure controls.
+- Confirm filter and form status announcements.
+- Check contrast, 200% zoom, and reduced motion.
+- Verify decorative graphics are hidden and meaningful images have useful alt text.
 
-Each case study includes:
+## Performance checks
 
-- Challenge
-- Approach
-- Deliverables
-- Result or intended impact
-- Skills and tools used
+- Run Lighthouse locally and after deployment.
+- Keep assets local and avoid unnecessary libraries or fonts.
+- Resize and compress approved photography; use responsive sources when added.
+- Check requests for 404s, mixed content, and oversized images.
 
-When writing new case studies:
-
-- Use careful language such as “designed to support,” “focused on,” or “intended to help.”
-- Avoid inventing client statistics, awards, logos, or outcomes.
-- Mark confidential or sensitive work clearly using general descriptions where needed.
-
-## Updating contact form content
-
-The contact form currently uses the existing Formspree endpoint:
-
-- https://formspree.io/f/mjkezvrd
-
-If the form needs updates:
-
-- edit the form fields in `index.html`
-- keep the fallback email `ejaquez@palmchat.io`
-- ensure the form remains accessible and includes validation, loading state, and success/error feedback
-
-## Accessibility and performance checks
-
-Before publishing, review the site for:
-
-- keyboard navigation and visible focus states
-- semantic headings and logical page structure
-- sufficient color contrast
-- reduced-motion support via `prefers-reduced-motion`
-- responsive behavior from mobile through desktop sizes
-- no dead links or broken asset paths
-- lightweight, static assets to maintain fast load times
-
-## Future improvements
-
-Suggested next steps:
-
-- add a real founder photo if approved
-- expand the resources section with publishable articles or downloadable guides
-- add additional case studies as new work is approved
-- create more branded asset files if the site evolves beyond the current static page
-- consider a lightweight CMS or static site generator only if future content volume requires it
-
-## Notes on domain and deployment
-
-The repository includes a `CNAME` file with the custom domain value `palmchat.io`. This should remain intact for GitHub Pages hosting.
-
-For domain and HTTPS troubleshooting, see `DEPLOYMENT.md` for the expected GitHub Pages configuration and DNS verification notes.
+See [ASSET_CHECKLIST.md](ASSET_CHECKLIST.md) for all final assets still needed.
