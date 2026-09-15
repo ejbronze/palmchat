@@ -2,7 +2,7 @@
 
 The production website for PalmChat Innovations LLC, a founder-led education and learning design studio helping schools and education organizations build meaningful computer science, professional learning, curriculum, and AI integration experiences.
 
-The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It deploys from the repository root to GitHub Pages at [palmchat.io](https://palmchat.io/).
+The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It can deploy directly from the repository root to Vercel or GitHub Pages at [palmchat.io](https://palmchat.io/).
 
 ## Local development and preview
 
@@ -18,6 +18,18 @@ Before publishing, check desktop, tablet, and mobile widths. Test the menu, all 
 4. Confirm the Pages deployment, then check HTTPS, metadata, asset paths, and the console.
 
 DNS is managed outside this repository and must not be changed during website updates.
+
+## Vercel deployment
+
+The repository includes `vercel.json` for clean static routes, long-lived asset caching, and baseline security headers. No build command or output directory is required.
+
+1. Import `ejbronze/palmchat` into Vercel or run `vercel deploy` from the repository root.
+2. Leave Framework Preset as **Other** and keep the root directory as `.`.
+3. Use a preview deployment first and verify all routes and interactions.
+4. Promote the tested deployment to production.
+5. Add `palmchat.io` to the Vercel project only when ready to migrate hosting, then update DNS using the exact records Vercel provides.
+
+Do not change DNS or remove `CNAME` until the Vercel preview has been approved and the domain migration is explicitly authorized.
 
 ## Asset structure
 

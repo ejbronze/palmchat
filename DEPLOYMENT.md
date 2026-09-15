@@ -1,5 +1,9 @@
 # Deployment and domain notes
 
+## Vercel preview and migration
+
+The site is also configured for static Vercel hosting through `vercel.json`. Use a Vercel preview deployment to validate the site before changing production hosting. Moving `palmchat.io` from GitHub Pages to Vercel requires a separate, deliberate DNS change after the preview is approved; it is not performed by committing this configuration.
+
 ## Expected GitHub Pages configuration
 
 This website is designed to run as a static GitHub Pages site from the repository root. The custom domain value is preserved in the `CNAME` file and should remain:
