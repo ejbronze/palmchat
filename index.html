@@ -1,232 +1,740 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PalmChat Innovations LLC — Expert Consulting for CS Education & Professional Development</title>
-  <meta name="description" content="PalmChat Innovations LLC helps schools design CS curriculum, train teachers, and integrate AI. NYC based. Bilingual support." />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <style>
-    :root {
-      --bg: #0b132b;
-      --ink: #e6f1ff;
-      --muted: #b7c4e0;
-      --accent: #00c2a8;
-      --card: #111a34;
-      --ring: rgba(0, 194, 168, 0.25);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% -10%, #17315d 0%, transparent 50%),
-                  radial-gradient(800px 600px at 90% 10%, #0e3945 0%, transparent 50%),
-                  var(--bg);
-      color: var(--ink);
-      line-height: 1.5;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PalmChat Innovations | Education Consulting for Schools, Programs, and AI Integration</title>
+    <meta name="description" content="PalmChat Innovations helps schools and education organizations design practical professional learning, computer science programs, curriculum, and AI-integrated learning experiences." />
+    <meta name="keywords" content="Education consulting, computer science education, teacher professional development, AI literacy for educators, curriculum design, instructional design, NYC education consultant, bilingual professional learning" />
+    <meta name="theme-color" content="#102b4a" />
+    <link rel="canonical" href="https://palmchat.io/" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PalmChat Innovations" />
+    <meta property="og:description" content="Practical innovation for better teaching and learning." />
+    <meta property="og:url" content="https://palmchat.io/" />
+    <meta property="og:image" content="assets/palmchat-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PalmChat Innovations" />
+    <meta name="twitter:description" content="Practical innovation for better teaching and learning." />
+    <meta name="twitter:image" content="assets/palmchat-logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "PalmChat Innovations",
+        "description": "PalmChat Innovations helps schools and education organizations design meaningful computer science, professional learning, curriculum, and AI integration experiences.",
+        "url": "https://palmchat.io/",
+        "areaServed": ["New York", "United States", "Remote"],
+        "founder": {
+          "@type": "Person",
+          "name": "Edwin Jaquez"
+        },
+        "knowsAbout": [
+          "Education consulting",
+          "Computer science education",
+          "Teacher professional development",
+          "AI literacy for educators",
+          "Curriculum design",
+          "Instructional design"
+        ],
+        "email": "ejaquez@palmchat.io"
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a class="brand" href="#top" aria-label="PalmChat Innovations home">
+          <img class="brand-mark" src="assets/palmchat-logo.png" alt="PalmChat Innovations logo" />
+          <span class="brand-copy">
+            <span class="brand-name">PalmChat Innovations</span>
+            <span class="brand-tag">Education + Learning Design</span>
+          </span>
+        </a>
 
-    /* Header */
-    header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 12px 0 8px;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand .logo img {
-      width: 44px;
-      height: auto;
-      display: block;
-      filter: invert(1) brightness(200%); /* makes logo white */
-    }
-    .brand h1 { font-size: 18px; margin: 0; letter-spacing: 0.2px; }
-    .nav a { margin-left: 16px; opacity: 0.9; }
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+        </button>
 
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      align-items: center;
-      padding: 56px 0;
-    }
-    .hero h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 0 0 12px; }
-    .hero p { margin: 0 0 18px; color: var(--muted); }
-    .cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #073a34;
-      padding: 12px 18px; border-radius: 12px;
-      font-weight: 700; border: 2px solid transparent;
-      cursor: pointer;
-    }
-    .cta:hover { filter: brightness(1.05); text-decoration: none; box-shadow: 0 0 0 6px var(--ring); }
-
-    /* Sections */
-    .section { padding: 36px 0; }
-    .card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .muted { color: var(--muted); }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 28px 0 50px;
-      margin-top: 28px;
-    }
-    footer .footer-brand {
-      display:flex; align-items:center; gap:10px;
-      color: var(--muted);
-    }
-    footer .footer-brand img {
-      width: 36px; height: auto;
-      filter: invert(1) brightness(200%);
-    }
-
-    /* Contact Form */
-    form label { display:block; margin: 8px 0 4px; }
-    form input, form textarea {
-      width: 100%; padding: 10px; border-radius: 8px;
-      border: 1px solid #ccc; font-size: 14px;
-    }
-    #formStatus { margin-top: 10px; font-size: 14px; color: var(--muted); }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .nav { display:none; }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">
-          <img src="assets/palmchat-logo.png" alt="PalmChat Innovations Logo" />
-        </div>
-        <div>
-          <h1>PalmChat Innovations LLC</h1>
-          <div class="lang">Bilingual • English · Español</div>
-        </div>
+        <nav class="site-nav" id="primary-navigation" aria-label="Main navigation">
+          <a class="nav-link is-active" href="#home">Home</a>
+          <a class="nav-link" href="#services">Services</a>
+          <a class="nav-link" href="#work">Work</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#resources">Resources</a>
+          <a class="nav-link" href="#contact">Contact</a>
+          <a class="nav-cta" href="#contact">Request a consultation</a>
+        </nav>
       </div>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
     </header>
 
-    <section class="hero">
-      <div>
-        <div class="kicker">Education Consulting</div>
-        <h2>Empowering Schools with Computer Science Education</h2>
-        <p class="muted">PalmChat Innovations LLC provides K-12 computer science education consulting, teacher professional development, and curriculum design to help schools build sustainable, future-ready CS programs.</p>
-        <div style="display:flex; gap:12px; margin-top:14px; flex-wrap: wrap;">
-          <a class="cta" href="#contact">👉 Let’s design innovative learning together</a>
+    <main>
+      <section class="hero section" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="kicker">Education innovation studio</div>
+            <h1>Practical innovation for better teaching and learning.</h1>
+            <p class="lead">PalmChat Innovations helps schools and education organizations design meaningful computer science, professional learning, curriculum, and AI integration experiences.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#work">Explore our work</a>
+              <a class="button button-secondary" href="#contact">Start a conversation</a>
+            </div>
+            <div class="hero-metrics" aria-label="Key areas of support">
+              <div class="metric">
+                <strong>CS</strong>
+                <span>program design</span>
+              </div>
+              <div class="metric">
+                <strong>PD</strong>
+                <span>professional learning</span>
+              </div>
+              <div class="metric">
+                <strong>AI</strong>
+                <span>ethical, practical use</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="PalmChat focus areas">
+            <span class="panel-badge">Focus areas</span>
+            <ul class="focus-list">
+              <li>Teachers need practical support using new technology.</li>
+              <li>Schools need sustainable computer science programs.</li>
+              <li>Leaders need professional learning connected to outcomes.</li>
+              <li>Organizations need thoughtful curriculum and learning experiences.</li>
+              <li>Education products need stronger instructional design.</li>
+            </ul>
+            <p class="panel-note">Experience includes work with schools, nonprofits, education organizations, and mission-driven learning teams.</p>
+          </aside>
+        </div>
+      </section>
+
+      <div class="partner-strip" aria-label="Experience and partnerships">
+        <div class="container partner-bar">
+          <span class="partner-label">Experience includes</span>
+          <div class="partner-logos" aria-label="Organizations PalmChat has worked with or alongside">
+            <span class="partner-item">Cornell Tech K–12 Equity Lab</span>
+            <span class="partner-item">Edmentum</span>
+            <span class="partner-item">Mouse</span>
+            <span class="partner-item">NYC Public Schools</span>
+            <span class="partner-item">PalmChat Innovations</span>
+          </div>
         </div>
       </div>
-      <div class="card" aria-label="Highlights">
-        <div class="pill">Focus areas</div>
-        <ul>
-          <li>CS curriculum development K–12</li>
-          <li>Teacher PD and coaching</li>
-          <li>CT integration in ELA and Math</li>
-          <li>AI literacy and emerging tools</li>
-          <li>SPED and SEL aligned approaches</li>
-        </ul>
-        <p class="muted" style="margin-top:12px">NYC based. Remote friendly.</p>
-      </div>
-    </section>
 
-    <section id="services" class="section">
-      <h3>Programs & Services</h3>
-      <div class="grid-3">
-        <div class="card">
-          <h4>🌱 CS Curriculum Development</h4>
-          <p class="muted">K-12 curriculum design with lesson plans, units, and scope & sequence aligned to standards. Integrates CT in math, ELA, and science.</p>
-          <p><strong>✅ What you gain:</strong> A turnkey roadmap teachers can use immediately.</p>
+      <section class="section" id="solutions">
+        <div class="container">
+          <div class="section-header">
+            <div class="kicker">What we help solve</div>
+            <h2>Support that turns strategy into sustained classroom practice.</h2>
+          </div>
+
+          <div class="solutions-grid">
+            <article class="solution-card">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 19V5l8-3 8 3v14M4 9h16M8 13h8" /></svg>
+              </div>
+              <h4>Practical teacher support</h4>
+              <p>Professional learning that helps educators use new tools with confidence and clarity.</p>
+            </article>
+
+            <article class="solution-card">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M3 18h18M7 13V7m5 6V4m5 9v-5" /></svg>
+              </div>
+              <h4>Sustainable CS programs</h4>
+              <p>Planning for curriculum, implementation, teacher support, and long-term buy-in.</p>
+            </article>
+
+            <article class="solution-card">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18" /></svg>
+              </div>
+              <h4>Leaders aligned to outcomes</h4>
+              <p>Action planning and facilitation that connect priorities, practice, and monitoring.</p>
+            </article>
+
+            <article class="solution-card">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 18c2-4 4-6 8-6s6 2 8 6M7 7h.01M12 7h.01M17 7h.01" /></svg>
+              </div>
+              <h4>Thoughtful curriculum design</h4>
+              <p>Instructional pathways that are engaging, rigorous, and responsive to community needs.</p>
+            </article>
+
+            <article class="solution-card">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-8" /><path d="M19 8h-5V3" /></svg>
+              </div>
+              <h4>Stronger product learning</h4>
+              <p>Instructional design and experience strategy for education products and programs.</p>
+            </article>
+          </div>
         </div>
-        <div class="card">
-          <h4>🎓 Professional Development</h4>
-          <p class="muted">Hands-on workshops and ongoing coaching in Scratch, ScratchJr, BeeBots, MicroBits, and AI integration.</p>
-          <p><strong>✅ What you gain:</strong> Confident teachers equipped to engage students in CS.</p>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-header">
+            <div class="kicker">Services</div>
+            <h2>Design support for leaders, educators, and learning teams.</h2>
+          </div>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <span class="service-tag">Professional Learning</span>
+              <h3>Professional Learning</h3>
+              <div class="service-body">
+                <p>Workshops, coaching, facilitation, and implementation support for educators and leaders.</p>
+                <ul class="service-list">
+                  <li><strong>Who it is for:</strong> schools, district teams, education nonprofits, and teacher leaders.</li>
+                  <li><strong>Problem it addresses:</strong> educators need practical guidance without added complexity.</li>
+                  <li><strong>What PalmChat delivers:</strong> live sessions, coaching cycles, resource design, and implementation planning.</li>
+                  <li><strong>Outcome:</strong> stronger practice, clearer priorities, and improved confidence.</li>
+                </ul>
+                <a class="service-link" href="#contact">Learn more</a>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <span class="service-tag">Computer Science</span>
+              <h3>Computer Science Program Design</h3>
+              <div class="service-body">
+                <p>Curriculum, scope and sequence, computational thinking integration, and district or school-level planning.</p>
+                <ul class="service-list">
+                  <li><strong>Who it is for:</strong> schools and districts building or strengthening K–12 CS pathways.</li>
+                  <li><strong>Problem it addresses:</strong> sustainable CS programs require thoughtful structure and alignment.</li>
+                  <li><strong>What PalmChat delivers:</strong> program design, curriculum maps, pacing, and implementation support.</li>
+                  <li><strong>Outcome:</strong> a clearer roadmap teachers and leaders can carry forward.</li>
+                </ul>
+                <a class="service-link" href="#contact">Learn more</a>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <span class="service-tag">AI Integration</span>
+              <h3>AI and Emerging Technology</h3>
+              <div class="service-body">
+                <p>AI literacy, prompt design, ethical use, classroom integration, and tool-agnostic professional learning.</p>
+                <ul class="service-list">
+                  <li><strong>Who it is for:</strong> schools, adult learning teams, and education organizations navigating new tech.</li>
+                  <li><strong>Problem it addresses:</strong> leaders need practical guidance that balances innovation and guardrails.</li>
+                  <li><strong>What PalmChat delivers:</strong> workshop design, facilitation, and implementation strategies for AI use.</li>
+                  <li><strong>Outcome:</strong> smarter, safer, and more relevant technology adoption.</li>
+                </ul>
+                <a class="service-link" href="#contact">Learn more</a>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <span class="service-tag">Curriculum & Product</span>
+              <h3>Curriculum and Product Development</h3>
+              <div class="service-body">
+                <p>Instructional design, learning experiences, educational resources, and education technology product development.</p>
+                <ul class="service-list">
+                  <li><strong>Who it is for:</strong> nonprofits, education companies, and product teams.</li>
+                  <li><strong>Problem it addresses:</strong> strong ideas need credible instructional design and learning flow.</li>
+                  <li><strong>What PalmChat delivers:</strong> resource design, learning experience strategy, and stakeholder-ready content.</li>
+                  <li><strong>Outcome:</strong> more effective learning tools and experiences for learners and educators.</li>
+                </ul>
+                <a class="service-link" href="#contact">Learn more</a>
+              </div>
+            </article>
+          </div>
         </div>
-        <div class="card">
-          <h4>🏫 CS Program Strategy</h4>
-          <p class="muted">Partner with leaders to align CS strategy with district goals, from pilots to full-school rollouts.</p>
-          <p><strong>✅ What you gain:</strong> Sustainable, long-term program growth.</p>
+      </section>
+
+      <section class="section" id="work">
+        <div class="container">
+          <div class="section-header">
+            <div class="kicker">Work</div>
+            <h2>Selected case studies and learning experiences.</h2>
+          </div>
+
+          <div class="case-toolbar" aria-label="Project filters">
+            <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+            <button class="filter-btn" type="button" data-filter="Professional Learning">Professional Learning</button>
+            <button class="filter-btn" type="button" data-filter="Computer Science">Computer Science</button>
+            <button class="filter-btn" type="button" data-filter="AI Integration">AI Integration</button>
+            <button class="filter-btn" type="button" data-filter="Curriculum Design">Curriculum Design</button>
+            <button class="filter-btn" type="button" data-filter="Leadership">Leadership</button>
+            <button class="filter-btn" type="button" data-filter="Product Development">Product Development</button>
+          </div>
+
+          <div class="case-grid">
+            <details class="case-study" data-category="Professional Learning Leadership">
+              <summary>
+                <div class="case-header">
+                  <h3 class="case-title">NYC District 16 Leadership Professional Learning</h3>
+                  <span class="case-type">Leadership</span>
+                </div>
+                <p>Support for school leaders translating district priorities into school-level action, ownership, monitoring, and student growth.</p>
+                <div class="case-meta">
+                  <span class="meta-pill">Professional Learning</span>
+                  <span class="meta-pill">Leadership</span>
+                </div>
+              </summary>
+              <div class="case-content">
+                <div class="case-grid-inner">
+                  <div>
+                    <h4>Challenge</h4>
+                    <ul>
+                      <li>District priorities were clear, but implementation varied across schools.</li>
+                      <li>Leaders needed a practical structure for action planning, progress monitoring, and conversation design.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Approach</h4>
+                    <ul>
+                      <li>Facilitated collaborative learning with leadership teams.</li>
+                      <li>Connected strategic priorities to school-level ownership, routines, and evidence of progress.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Deliverables</h4>
+                    <ul>
+                      <li>Leadership workshops and planning conversations.</li>
+                      <li>Implementation frameworks and monitoring tools.</li>
+                      <li>Materials designed to support school-based action.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Result / intended impact</h4>
+                    <ul>
+                      <li>Designed to help leaders move from priorities to concrete action and accountability.</li>
+                      <li>Focused on stronger ownership, visibility, and alignment to student growth.</li>
+                    </ul>
+                  </div>
+                  <div class="full-width">
+                    <h4>Skills and tools used</h4>
+                    <ul>
+                      <li>Facilitation, strategic planning, instructional leadership, professional learning design, stakeholder engagement.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="case-study" data-category="AI Integration Professional Learning">
+              <summary>
+                <div class="case-header">
+                  <h3 class="case-title">Mouse AI Fluency Professional Learning</h3>
+                  <span class="case-type">AI Integration</span>
+                </div>
+                <p>Support for NYC educators building AI literacy, prompt development, ethical use, and classroom applications.</p>
+                <div class="case-meta">
+                  <span class="meta-pill">AI Integration</span>
+                  <span class="meta-pill">Professional Learning</span>
+                </div>
+              </summary>
+              <div class="case-content">
+                <div class="case-grid-inner">
+                  <div>
+                    <h4>Challenge</h4>
+                    <ul>
+                      <li>Educators needed a practical understanding of generative AI without being overwhelmed by hype.</li>
+                      <li>Teachers needed guidance on prompting, bias, guardrails, and classroom relevance.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Approach</h4>
+                    <ul>
+                      <li>Facilitated cross-disciplinary professional learning with hands-on practice and reflection.</li>
+                      <li>Positioned AI use as a classroom design conversation grounded in ethics, equity, and learning goals.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Deliverables</h4>
+                    <ul>
+                      <li>Learning sessions and coaching for educators.</li>
+                      <li>Prompting frameworks and discussion guides.</li>
+                      <li>Ethical-use and guardrail resources.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Result / intended impact</h4>
+                    <ul>
+                      <li>Designed to help educators feel more prepared to evaluate, use, and teach with AI thoughtfully.</li>
+                      <li>Focused on practical classroom applications that align with instructional goals.</li>
+                    </ul>
+                  </div>
+                  <div class="full-width">
+                    <h4>Skills and tools used</h4>
+                    <ul>
+                      <li>Facilitation, AI literacy design, prompt engineering, ethics, educator coaching, workshop development.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="case-study" data-category="Professional Learning Curriculum Design">
+              <summary>
+                <div class="case-header">
+                  <h3 class="case-title">Edmentum Exact Path Professional Learning</h3>
+                  <span class="case-type">Professional Learning</span>
+                </div>
+                <p>Support for educators and leaders using adaptive learning data, implementation practice, and professional learning to support student growth.</p>
+                <div class="case-meta">
+                  <span class="meta-pill">Professional Learning</span>
+                  <span class="meta-pill">Curriculum Design</span>
+                </div>
+              </summary>
+              <div class="case-content">
+                <div class="case-grid-inner">
+                  <div>
+                    <h4>Challenge</h4>
+                    <ul>
+                      <li>Adaptive learning tools can be underused when educators lack time, context, or implementation support.</li>
+                      <li>Leaders needed a learning plan that connected platform usage to student growth and instructional practice.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Approach</h4>
+                    <ul>
+                      <li>Designed professional learning grounded in instructional use, data interpretation, and implementation routines.</li>
+                      <li>Supported educators in connecting student data to classroom decision-making.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Deliverables</h4>
+                    <ul>
+                      <li>Facilitated professional learning sessions.</li>
+                      <li>Implementation guidance and planning support.</li>
+                      <li>Materials for educators and leaders.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Result / intended impact</h4>
+                    <ul>
+                      <li>Designed to help teams use adaptive learning tools more strategically and consistently.</li>
+                      <li>Focused on stronger implementation and student support practices.</li>
+                    </ul>
+                  </div>
+                  <div class="full-width">
+                    <h4>Skills and tools used</h4>
+                    <ul>
+                      <li>Adaptive learning support, educator coaching, data-informed instruction, learning design, facilitation.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="case-study" data-category="Product Development">
+              <summary>
+                <div class="case-header">
+                  <h3 class="case-title">PIKAS School Meal Platform</h3>
+                  <span class="case-type">Product Development</span>
+                </div>
+                <p>A school meal and cafeteria / POS platform designed with PalmChat Innovations to improve practical workflows and user experience.</p>
+                <div class="case-meta">
+                  <span class="meta-pill">Product Development</span>
+                  <span class="meta-pill">Learning Experience Design</span>
+                </div>
+              </summary>
+              <div class="case-content">
+                <div class="case-grid-inner">
+                  <div>
+                    <h4>Challenge</h4>
+                    <ul>
+                      <li>School meal operations need clear workflows, useful training, and user-friendly tools.</li>
+                      <li>Product design needed to balance operational realities with stakeholder experience.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Approach</h4>
+                    <ul>
+                      <li>Helped shape a practical platform experience grounded in user needs and implementation realities.</li>
+                      <li>Supported product development with domain-informed design thinking and learning flow.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Deliverables</h4>
+                    <ul>
+                      <li>Product and experience design support.</li>
+                      <li>Operationally grounded recommendations for usability and onboarding.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Result / intended impact</h4>
+                    <ul>
+                      <li>Designed to support smoother school meal operations and more usable digital experiences.</li>
+                    </ul>
+                  </div>
+                  <div class="full-width">
+                    <h4>Skills and tools used</h4>
+                    <ul>
+                      <li>Product concepting, user experience design, product strategy, stakeholder feedback synthesis, workflow design.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="case-study" data-category="Computer Science Professional Learning">
+              <summary>
+                <div class="case-header">
+                  <h3 class="case-title">Cornell Tech K–12 Computer Science Coaching</h3>
+                  <span class="case-type">Computer Science</span>
+                </div>
+                <p>K–8 coaching and professional development focused on computer science integration, computational thinking, and teacher support.</p>
+                <div class="case-meta">
+                  <span class="meta-pill">Computer Science</span>
+                  <span class="meta-pill">Professional Learning</span>
+                </div>
+              </summary>
+              <div class="case-content">
+                <div class="case-grid-inner">
+                  <div>
+                    <h4>Challenge</h4>
+                    <ul>
+                      <li>Teachers needed support translating broad CS goals into instructionally sound classroom practice.</li>
+                      <li>Schools wanted a sustainable model for ongoing coaching and integration.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Approach</h4>
+                    <ul>
+                      <li>Partnered with educators to build computational thinking and CS learning experiences.</li>
+                      <li>Combined coaching, classroom support, and implementation planning.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Deliverables</h4>
+                    <ul>
+                      <li>Coaching cycles, planning support, and professional development.</li>
+                      <li>Resources to strengthen classroom integration.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Result / intended impact</h4>
+                    <ul>
+                      <li>Designed to strengthen teacher confidence and build sustainable classroom practice.</li>
+                    </ul>
+                  </div>
+                  <div class="full-width">
+                    <h4>Skills and tools used</h4>
+                    <ul>
+                      <li>Computer science education, K–8 coaching, computational thinking, teacher PD, facilitation, curriculum integration.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="about" class="section">
-      <h3>About</h3>
-      <p class="muted">PalmChat Innovations LLC partners with schools and organizations to make computer science learning joyful, rigorous, and inclusive. We bring expertise in CS pedagogy, teacher coaching, and AI integration. Founded by Edwin R. Jaquez.</p>
-      <p class="muted"><strong>Tagline en español:</strong> Consultoría experta en educación informática y desarrollo profesional.</p>
-    </section>
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-header">
+            <div class="kicker">About Edwin</div>
+            <h2>Founder-led learning design grounded in classroom experience.</h2>
+          </div>
 
-    <section id="contact" class="section">
-      <h3>Contact</h3>
-      <div class="card">
-        <form id="contactForm" action="https://formspree.io/f/mjkezvrd" method="POST">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
-          
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-          
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-          
-          <input type="hidden" name="_subject" value="New inquiry from PalmChat.io" />
-          <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
-          
-          <button type="submit" class="cta">Send</button>
-          <p id="formStatus"></p>
-        </form>
-      </div>
-    </section>
+          <div class="about-grid">
+            <div class="about-card portrait-wrap">
+              <img src="assets/palmchat-logo.png" alt="Portrait placeholder for Edwin Jaquez" />
+            </div>
 
-    <footer>
-      <div class="footer-brand">
-        <img src="assets/palmchat-logo.png" alt="PalmChat Logo" />
-        © <span id="y"></span> PalmChat Innovations LLC • NYC
+            <div class="about-detail">
+              <p class="lead">Edwin Jaquez is an educator, computer science teacher, school culture and instructional leader, professional learning consultant, curriculum and program designer, and founder building education products.</p>
+
+              <p>He brings a practical lens shaped by teaching, leadership, and learning design. That work informs how PalmChat Innovations partners with schools and education organizations to build programs, experiences, and professional learning that are both rigorous and usable.</p>
+
+              <details class="read-more" aria-label="Read more about Edwin Jaquez">
+                <summary>Read more</summary>
+                <div data-bio>
+                  <p>Edwin’s work centers on helping adults and students connect learning goals, instructional practice, and meaningful change. He supports teams that want professional learning to feel relevant, leadership to feel actionable, and curriculum to feel coherent from idea to implementation.</p>
+                  <p>He is bilingual in English and Spanish and supports learning experiences rooted in joy, rigor, practicality, and inclusion. PalmChat Innovations is designed to make learning more approachable, engaging, and relevant—while still being clear, strategic, and accountable to real outcomes.</p>
+                </div>
+              </details>
+
+              <p><strong>Languages:</strong> English and Spanish</p>
+              <p><strong>Approach:</strong> Making learning joyful, rigorous, practical, and inclusive.</p>
+              <a class="button button-primary" href="#contact">Work together</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="resources">
+        <div class="container">
+          <div class="section-header">
+            <div class="kicker">Resources</div>
+            <h2>Ideas, tools, and learning support for future conversations.</h2>
+          </div>
+
+          <div class="resource-grid">
+            <article class="resource-card">
+              <span class="resource-status">Coming soon</span>
+              <h4>AI Fluency for Educators</h4>
+              <p>Practical thinking for educators exploring AI in meaningful, ethical classroom practice.</p>
+              <a href="#contact">Request updates</a>
+            </article>
+
+            <article class="resource-card">
+              <span class="resource-status">Coming soon</span>
+              <h4>Computer Science Integration</h4>
+              <p>Ideas for bringing computational thinking and CS experiences into everyday learning.</p>
+              <a href="#contact">Request updates</a>
+            </article>
+
+            <article class="resource-card">
+              <span class="resource-status">Coming soon</span>
+              <h4>Professional Learning Design</h4>
+              <p>Frameworks for creating learning experiences that lead to stronger classroom practice.</p>
+              <a href="#contact">Request updates</a>
+            </article>
+
+            <article class="resource-card">
+              <span class="resource-status">Coming soon</span>
+              <h4>School Technology Implementation</h4>
+              <p>Planning support for thoughtful technology adoption across schools and programs.</p>
+              <a href="#contact">Request updates</a>
+            </article>
+
+            <article class="resource-card">
+              <span class="resource-status">Coming soon</span>
+              <h4>Curriculum and Instructional Design</h4>
+              <p>Design thinking for curriculum, resources, and learning experiences that work.</p>
+              <a href="#contact">Request updates</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-grid">
+          <aside class="contact-panel">
+            <div class="kicker">Contact</div>
+            <h2>Start a conversation.</h2>
+            <p>Whether you're designing professional learning, building a computer science initiative, integrating AI thoughtfully, or developing a program or resource, PalmChat can help you move from idea to implementation.</p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z" /><path d="m4 8 8 6 8-6" /></svg>
+                </span>
+                <div>
+                  <strong>Email</strong><br />
+                  <a href="mailto:ejaquez@palmchat.io">ejaquez@palmchat.io</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 21s-6-4.35-9-9a5.5 5.5 0 0 1 9-6.5A5.5 5.5 0 0 1 21 12c-3 4.65-9 9-9 9Z" /></svg>
+                </span>
+                <div>
+                  <strong>Location</strong><br />
+                  New York and remote engagements
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" /><path d="M9 8h6M9 12h6M9 16h4" /></svg>
+                </span>
+                <div>
+                  <strong>Focus</strong><br />
+                  Schools, districts, nonprofits, and education teams
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="form-card">
+            <form id="contactForm" action="https://formspree.io/f/mjkezvrd" method="POST" novalidate>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" autocomplete="name" aria-describedby="formStatus" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="organization">Organization</label>
+                  <input id="organization" name="organization" type="text" autocomplete="organization" aria-describedby="formStatus" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="role">Role</label>
+                  <input id="role" name="role" type="text" autocomplete="organization-title" aria-describedby="formStatus" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" autocomplete="email" aria-describedby="formStatus" required />
+                </div>
+
+                <div class="form-field full-width">
+                  <label>What are you looking for?</label>
+                  <div class="checkbox-group" id="inquiryGroup">
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Professional learning" /> Professional learning</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Computer science program design" /> Computer science program design</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="AI integration" /> AI integration</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Curriculum development" /> Curriculum development</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Product or learning experience design" /> Product or learning experience design</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Speaking or facilitation" /> Speaking or facilitation</label>
+                    <label class="option-check"><input type="checkbox" name="inquiry[]" value="Something else" /> Something else</label>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="timeline">Approximate timeline</label>
+                  <select id="timeline" name="timeline" aria-describedby="formStatus" required>
+                    <option value="">Select a timeline</option>
+                    <option value="This month">This month</option>
+                    <option value="Next 1-3 months">Next 1-3 months</option>
+                    <option value="Next 3-6 months">Next 3-6 months</option>
+                    <option value="Exploring options">Exploring options</option>
+                  </select>
+                </div>
+
+                <div class="form-field full-width">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" required aria-describedby="formStatus" placeholder="Share a bit about your project, goals, and timeline."></textarea>
+                </div>
+              </div>
+
+              <div class="hidden-field">
+                <label for="_gotcha">Leave this blank</label>
+                <input id="_gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <div class="submit-row">
+                <button id="submitButton" class="button button-primary button-submit" type="submit">Send inquiry</button>
+                <span class="form-note">Prefer email? <a href="mailto:ejaquez@palmchat.io">ejaquez@palmchat.io</a></span>
+              </div>
+              <p id="formStatus" class="form-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="assets/palmchat-logo.png" alt="PalmChat Innovations logo" />
+          <span>© <span id="year"></span> PalmChat Innovations LLC</span>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
       </div>
     </footer>
-  </div>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
-    // Contact form handler
-    const form = document.getElementById('contactForm');
-    const statusEl = document.getElementById('formStatus');
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        statusEl.textContent = 'Sending…';
-        try {
-          const data = new FormData(form);
-          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-          if (res.ok) {
-            statusEl.textContent = '✅ Thanks! Your message was sent.';
-            form.reset();
-          } else {
-            statusEl.textContent = '⚠️ Something went wrong. Try again or email ejaquez@palmchat.io.';
-          }
-        } catch (err) {
-          statusEl.textContent = '❌ Network error. Please try again later.';
-        }
-      });
-    }
-  </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
