@@ -1,28 +1,30 @@
-# PalmChat asset checklist
+# Asset checklist
 
-This site uses intentional temporary placeholders until approved production assets are available.
+## Created and ready for review
 
-## Priority assets still needed
+- [x] Refined palm-and-bird mark: `assets/brand/palmchat-mark-v2.svg`
+- [x] Horizontal wordmark: `assets/brand/palmchat-horizontal-v2.svg`
+- [x] Reverse wordmark: `assets/brand/palmchat-reverse-v2.svg`
+- [x] Compact SVG favicon: `assets/brand/favicon-v2.svg`
+- [x] Apple touch icon: `assets/brand/apple-touch-icon-v2.png`
+- [x] Social preview: `assets/social/palmchat-preview-v2.png` (1200×630)
+- [x] EJ founder monogram in HTML/CSS, distinct from the company logo
+- [x] Old decorative covers and obsolete brand raster assets removed
 
-- [ ] Approved founder portrait for Edwin Jaquez
-- [ ] Official horizontal, stacked, light-background, and dark-background logo variations
-- [ ] Source SVG version of the official palm-and-bird logo
-- [ ] Approved replacements for the five temporary SVG project-cover graphics
-- [ ] PIKAS screenshots cleared for public use and scrubbed of student/private data
-- [ ] Workshop and facilitation photography with usage permission
-- [ ] Current capabilities statement
-- [ ] Final social preview image with approved logo lockup and copy
-- [ ] Complete favicon package (SVG, ICO, Apple touch icon, web manifest)
-- [ ] Resource-cover graphics when real resources are published
-- [ ] Testimonials only after written approval and wording verification
+Use only mustard #D5A72C, shrub green #4F683E, white #FFFDF8, and light brown #C7A982. Do not use mustard or brown behind normal green text. Version replacement filenames to respect existing long-lived caching.
+
+## Still needed or optional
+
+- [ ] Approved professional founder portrait; replace the About monogram in the generator
+- [ ] Public naming permission for the four organization-related engagements; general titles are used meanwhile
 - [ ] Verified LinkedIn URL
-- [ ] Attorney-reviewed privacy policy content
+- [ ] Approved privacy policy content, including retention practices
+- [ ] Capabilities statement (real PDF, reviewed before adding a download)
+- [ ] Professional learning sample agenda
+- [ ] Approved work artifacts and curriculum screenshots, with private information removed
+- [ ] Workshop photography with usage consent; optional, not needed for launch
+- [ ] Approved testimonials and attribution; none published
+- [ ] Project cover visuals only if they communicate real context; not needed by the current design
+- [ ] School meal platform visual only if explicitly approved and entirely fictionalized; no actual product screens, branding, configurations, or data
 
-## Temporary assets currently in use
-
-- Founder: HTML/CSS “EJ” editorial profile placeholder in `index.html`
-- Project covers: five temporary, project-specific SVGs in `assets/projects/`
-- Social preview: `assets/social/palmchat-social-preview.jpg`
-- Logo and favicon copies: `assets/brand/`
-
-Replace placeholders non-destructively, preserve meaningful alt text, and optimize raster images before publishing.
+The website has no fake resources, stock photos, client logos, or implied endorsements. Stacked logo and ICO variants are optional future exports; the responsive wordmark and SVG favicon cover current use.

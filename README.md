@@ -1,99 +1,71 @@
 # PalmChat Innovations
 
-The production website for PalmChat Innovations LLC, a founder-led education and learning design studio helping schools and education organizations build meaningful computer science, professional learning, curriculum, and AI integration experiences.
+A text-led, founder-led education consulting website for PalmChat Innovations LLC. Semantic HTML, local CSS, and dependency-free JavaScript; no framework migration, npm dependencies, package.json, external fonts, or runtime build service.
 
-The site uses semantic HTML, modern CSS, and dependency-free JavaScript. It is a multi-page static site that deploys directly from the repository root to Vercel or GitHub Pages at [palmchat.io](https://palmchat.io/).
+## Develop and preview
 
-## Local development and preview
-
-Run `python3 -m http.server 8000` from the repository root, then open `http://localhost:8000`. There is no build step.
-
-Before publishing, check desktop, tablet, and mobile widths. Test the menu, all anchors, filters, service and case-study disclosure controls, form validation, keyboard focus, and reduced-motion behavior. Do not send a live Formspree submission during routine testing; mock `fetch` when checking success and error states.
-
-### Page generation
-
-Shared page chrome and structured service/project content live in `scripts/build-pages.mjs`. After editing that source, regenerate the checked-in static pages with:
-
-```bash
+```sh
 node scripts/build-pages.mjs
+node scripts/preview.mjs
 ```
 
-The generated HTML files must remain committed so direct navigation and refreshes work without server-side routing. Edit `styles.css` and `script.js` directly; the generator does not overwrite them.
+Open http://127.0.0.1:8765. The local server resolves extensionless URLs like the existing Vercel cleanUrls configuration. Stop it with Ctrl+C. Edit shared content in `scripts/build-pages.mjs`, then regenerate; edit `styles.css` and `script.js` directly. Generated HTML is the production output. There is no separate compilation step.
 
-## GitHub Pages deployment
+## Routes
 
-1. Keep Pages pointed at the repository root on the publishing branch.
-2. Keep `CNAME` unchanged with the single value `palmchat.io`.
-3. Commit and push only after review and approval.
-4. Confirm the Pages deployment, then check HTTPS, metadata, asset paths, and the console.
+- `/`
+- `/services`
+- `/services/professional-learning`
+- `/services/computer-science`
+- `/services/ai-emerging-technology`
+- `/services/curriculum-product-development`
+- `/work`
+- `/work/district-16`
+- `/work/mouse-ai-fluency`
+- `/work/exact-path`
+- `/work/school-meal-platform`
+- `/work/cornell-tech`
+- `/about`
+- `/resources`
+- `/contact`
+- `/privacy`
 
-DNS is managed outside this repository and must not be changed during website updates.
+Section routes resolve to directory indexes; detail routes resolve to HTML files. Canonical metadata uses `https://palmchat.io` and clean paths. No client router or catch-all rewrite is needed.
 
-## Vercel deployment
+## Hosting and release
 
-The repository includes `vercel.json` for clean static routes, long-lived asset caching, and baseline security headers. No build command or output directory is required.
+The existing Vercel project is already linked and hosted at `palmchat.io`. Preserve `.vercel`, `vercel.json`, CNAME, HTTPS, environment variables, project settings, and DNS. The static site deploys from the repository root with its existing no-build settings. Do not re-import the project or follow a domain migration procedure.
 
-1. Import `ejbronze/palmchat` into Vercel or run `vercel deploy` from the repository root.
-2. Leave Framework Preset as **Other** and keep the root directory as `.`.
-3. Use a preview deployment first and verify all routes and interactions.
-4. Promote the tested deployment to production.
-5. Add `palmchat.io` to the Vercel project only when ready to migrate hosting, then update DNS using the exact records Vercel provides.
+After Edwin approves the finished work, commit and push using the existing release workflow. Any preview or production deployment requires approval. Verify all direct URLs and refreshes on the approved preview before publishing. Local checks cannot prove remote project settings or HTTPS configuration; this redesign does not change them.
 
-Do not change DNS or remove `CNAME` until the Vercel preview has been approved and the domain migration is explicitly authorized.
+## Content maintenance
 
-## Asset structure
+Service records live in the generator's `services` array. Update descriptions, audiences, problems, support, and engagement formats there and regenerate.
 
-```text
-assets/
-  brand/     Official logo and favicon copies
-  icons/     Reusable local icons
-  images/    Founder and editorial photography
-  projects/  Approved project covers and screenshots
-  social/    Open Graph and social-preview assets
-```
+Add a case study to `projects` with a unique slug, accurate title, description, context, role, approach, deliverables, methods, intended impact, and existing related slugs. Regenerate and verify the new route. Covers are optional and currently omitted to keep the work text-led. Do not invent outcomes or imply endorsement. Obtain public naming permission before replacing the general organization descriptions. The requested organization-related slugs remain for compatibility.
 
-Legacy root-level logo and favicon files remain for compatibility. New references use `assets/brand/`. Temporary placeholders are documented in [ASSET_CHECKLIST.md](ASSET_CHECKLIST.md). To add a real founder portrait, place an optimized image in `assets/images/`, replace `.portrait-placeholder` in `index.html`, and add accurate alt text.
+The school-meal case is intentionally anonymous and capability-level only. Never add actual branding, screenshots, internal workflows, business rules, private data, or implementation details. Any future visual must be fictionalized and explicitly approved.
 
-## Site map
+## Assets
 
-- `/` — concise homepage
-- `/services/` and four service detail pages
-- `/work/` and five dedicated case-study pages
-- `/about/`
-- `/resources/`
-- `/contact/`
-- `/privacy.html`
+`assets/brand/` contains the palm-and-bird mark, horizontal/reverse wordmarks, SVG favicon, and 180px Apple touch icon. `assets/social/` contains the 1200×630 PNG social preview. Assets use versioned filenames because existing Vercel asset headers cache files for a year. Use a new filename when replacing one and update the generator references.
 
-All page and asset links are root-relative for reliable navigation from nested pages on the custom domain.
+The About portrait is an intentional HTML/CSS EJ monogram, not the company logo. To replace it, add an optimized approved photo under `assets/images/`, update `.ej-portrait` in the generator with an image and accurate alt text, provide width/height, and regenerate. No stock or generated photography is used. See ASSET_CHECKLIST.md for outstanding approvals and assets.
 
-## Adding a case study
+## Contact
 
-Add a project record to the `projects` array in `scripts/build-pages.mjs`, add its SVG cover under `assets/projects/`, and regenerate the pages. Include Context, Challenge, PalmChat role, Approach, Deliverables, Tools or methods, Intended impact, related work, and any confidentiality note. Use careful language such as “designed to support” when verified outcomes are unavailable. Never invent statistics, logos, testimonials, partnerships, or outcomes.
+Contact is email-only at `erjaquez@gmail.com`. The contact page and footer link directly to this address. Resource update requests open an email with a prefilled subject; there is no mailing-list subscription. Update the email in `scripts/build-pages.mjs` and regenerate to change it across all pages. No contact form or Formspree integration remains.
 
-## Updating services
+## Verification
 
-Service content lives in the `services` array in `scripts/build-pages.mjs`. Regenerate after editing and check both the service index and detail pages.
+Regenerate production HTML with `node scripts/build-pages.mjs`; run `node --check script.js` and `git diff --check`. Start the preview and check all listed routes directly and after refresh. Browser verification should cover desktop, tablet, 390px and 320px mobile widths, keyboard focus, Escape and navigation closure, service disclosures, reduced motion, broken assets, metadata, and console errors.
 
-## Contact form
+The reusable browser check is `tests/e2e/verify.cjs`. It requires Playwright installed in your tooling environment, not in production. Run `PLAYWRIGHT_MODULE=/absolute/path/to/playwright node tests/e2e/verify.cjs` while the preview is running. It checks that the contact page has no form and that email links use the current address. Screenshots are written to the operating system temporary directory.
 
-The form posts to `https://formspree.io/f/mjkezvrd`. To change the endpoint, update the form source in `scripts/build-pages.mjs`, regenerate, and confirm the generated action in `contact/index.html`. `script.js` validates fields, sets `aria-invalid`, handles loading and network/server failures, resets after success, and uses an `aria-live` status. Keep the `_gotcha` honeypot and email fallback.
+Green (#4F683E) on white (#FFFDF8) is used for text and the inverse for filled sections. Mustard (#D5A72C) and light brown (#C7A982) are decorative, not normal-text backgrounds. Check contrast when introducing new combinations. Content stays visible without animation; reduced-motion settings remove transitions and scrolling effects.
 
-The browser workflow has been verified with mocked successful and failed Formspree responses; no live inquiry was sent. In the Formspree dashboard, still confirm that the endpoint belongs to the correct account, delivers to the intended inbox, has appropriate spam controls, retains the expected submission history, and sends the desired email notifications.
+For performance, keep scripts and fonts local, preserve explicit image dimensions, compress future portrait assets, and run Lighthouse against an approved preview. No Lighthouse score is claimed. The current site needs no third-party UI libraries.
 
-## Accessibility checks
+## Known limitations
 
-- Confirm one H1 and logical headings.
-- Navigate every control by keyboard and verify visible focus.
-- Check mobile-menu Escape behavior and disclosure controls.
-- Confirm filter and form status announcements.
-- Check contrast, 200% zoom, and reduced motion.
-- Verify decorative graphics are hidden and meaningful images have useful alt text.
-
-## Performance checks
-
-- Run Lighthouse locally and after deployment.
-- Keep assets local and avoid unnecessary libraries or fonts.
-- Resize and compress approved photography; use responsive sources when added.
-- Check requests for 404s, mixed content, and oversized images.
-
-See [ASSET_CHECKLIST.md](ASSET_CHECKLIST.md) for all final assets still needed.
+Public organization naming permission, an approved portrait, LinkedIn URL, and final privacy wording remain outstanding. No client logos, testimonials, fabricated downloads, or newsletter signup appear. The privacy page describes the current contact flow; business retention policies require owner review. Remote Vercel routing must be confirmed after approval; no deployment was performed during the redesign.
