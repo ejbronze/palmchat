@@ -20,9 +20,7 @@ Open http://127.0.0.1:8765. The local server resolves extensionless URLs like th
 - `/services/ai-emerging-technology`
 - `/services/curriculum-product-development`
 - `/work`
-- `/work/district-16`
 - `/work/mouse-ai-fluency`
-- `/work/exact-path`
 - `/work/school-meal-platform`
 - `/work/cornell-tech`
 - `/about`
