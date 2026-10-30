@@ -1,6 +1,8 @@
 # PalmChat Innovations
 
-A text-led, founder-led education consulting website for PalmChat Innovations LLC. Semantic HTML, local CSS, and dependency-free JavaScript; no framework migration, npm dependencies, package.json, external fonts, or runtime build service.
+The palmchat.io website for PalmChat Innovations LLC. Semantic HTML, one stylesheet, and dependency-free JavaScript. No framework, npm dependencies, or build service.
+
+The homepage is a scroll-driven journey: one pinned stage where five scenes dissolve into each other while the cigua palmera flies between perches. Inner pages (services, work, about, contact, resources, privacy) share the same visual system with a perched bird in each hero. Visitors with reduced motion turned on get a calm stacked homepage.
 
 ## Develop and preview
 
@@ -9,7 +11,15 @@ node scripts/build-pages.mjs
 node scripts/preview.mjs
 ```
 
-Open http://127.0.0.1:8765. The local server resolves extensionless URLs like the existing Vercel cleanUrls configuration. Stop it with Ctrl+C. Edit shared content in `scripts/build-pages.mjs`, then regenerate; edit `styles.css` and `script.js` directly. Generated HTML is the production output. There is no separate compilation step.
+Open http://127.0.0.1:8765. The local server resolves extensionless URLs like the existing Vercel cleanUrls configuration. Stop it with Ctrl+C.
+
+- Page content and the shared header, menu, and footer live in `scripts/build-pages.mjs`.
+- The homepage journey markup lives in `scripts/partials/home.html`. Elements marked `data-perch` are where the bird lands, in order.
+- `script.js` holds shared behavior: the bird, generated palm fronds (`data-frond`), the menu, the prompt refiner (`data-refiner`), and email copy.
+- `home.js` runs the homepage journey.
+- Fonts are Geist and Geist Mono, self-hosted in `assets/fonts/` under the SIL Open Font License (`OFL.txt`).
+
+Edit, regenerate, and commit the generated HTML. There is no separate compilation step.
 
 ## Routes
 
