@@ -32,7 +32,24 @@
   document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', (e) => {
     e.preventDefault(); window.PalmChatMenu?.close(); goTo(+b.dataset.go);
   }));
-  if (root.classList.contains('static')) return;
+  /* the nest: built a strand at a time, one per landing */
+  const nest = document.getElementById('nest'), strandsG = document.getElementById('strands');
+  const spot = stage.querySelector('.nest-spot');
+  const STRANDS = 14, strandEls = [];
+  const browns = ['#5A4528', '#7A5A2E', '#4A3820', '#9AA637', '#6E5734', '#8A6A38'];
+  for (let i = 0; i < STRANDS; i++) {
+    const k = i / (STRANDS - 1), depth = 18 + (i % 5) * 9, x0 = 20 + (i % 3) * 6, x1 = 180 - ((i + 1) % 3) * 6, y = 46 + (i % 4) * 4;
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    el.setAttribute('d', `M${x0} ${y + (k * 6 - 3)} C ${60 - (i % 2) * 14} ${y + depth + 40}, ${140 + (i % 2) * 14} ${y + depth + 40}, ${x1} ${y - (k * 6 - 3)}`);
+    el.setAttribute('class', 'strand'); el.setAttribute('stroke', browns[i % browns.length]); el.setAttribute('stroke-width', String(5 + (i % 3)));
+    strandsG.appendChild(el); strandEls.push(el);
+  }
+  strandEls.forEach((el) => { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L; el.dataset.l = L; });
+  const setNest = (n) => {
+    strandEls.forEach((el, i) => { el.style.strokeDashoffset = i < n ? 0 : el.dataset.l; });
+    nest.classList.toggle('started', n > 0); nest.classList.toggle('full', n >= STRANDS);
+  };
+  if (root.classList.contains('static')) { spot.appendChild(nest); setNest(STRANDS); return; }
 
   const flyer = document.getElementById('flyer'), fBird = flyer.querySelector('.bird');
   const head = fBird.querySelector('.head'), pupil = fBird.querySelector('.pupil');
@@ -113,6 +130,22 @@
     const tilt = flying ? Math.max(-14, Math.min(14, (rb.y - ra.y) * 0.02)) * (face === 'l' ? -1 : 1) : 0;
     flyer.style.transform = `translate3d(${bx.toFixed(1)}px,${by.toFixed(1)}px,0) rotate(${tilt}deg)`;
     if (flying !== flapping) { flapping = flying; fBird.classList.toggle('flying', flying); }
+
+    // carrying a twig while flying
+    flyer.classList.toggle('carrying', flying);
+
+    // the nest grows a little at each landing, then flies onto the frond in the last scene
+    const landed = perches.filter((p) => p.P <= prog + 0.02 && !(flying && p === b)).length;
+    setNest(Math.round((STRANDS * landed) / perches.length));
+    const sw = stage.clientWidth, sh = stage.clientHeight, small = sw <= 900;
+    const restW = small ? 68 : 130;
+    const rest = small ? { x: (sw - restW) / 2, y: 30 } : { x: sw - restW - 70, y: sh - restW * 0.6 - 40 };
+    const sc4 = scenes[N - 1], tf4 = sc4.style.transform; sc4.style.transform = 'none';
+    const sr = spot.getBoundingClientRect(), st = stage.getBoundingClientRect(); sc4.style.transform = tf4;
+    const k = ease(clamp((prog - (N - 1.6)) / 0.5));
+    const nw = restW + (sr.width - restW) * k;
+    nest.style.width = `${nw}px`;
+    nest.style.transform = `translate3d(${(rest.x + (sr.left - st.left - rest.x) * k).toFixed(1)}px,${(rest.y + (sr.top - st.top - rest.y) * k).toFixed(1)}px,0)`;
 
     // a trail of light where the bird has been
     if (flying) trail.push({ x: bx + w * 0.45, y: by + w * 0.42, life: 1 });

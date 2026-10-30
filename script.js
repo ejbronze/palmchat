@@ -22,10 +22,13 @@
       <path class="shape" d="M183 62 L214 72 L184 84 Z" fill="#F2D27A"/><path class="detail" d="M184 73 L212 72" stroke="#B8902F" stroke-width="2"/>
       <g class="detail"><circle cx="170" cy="66" r="7.5" fill="#B3261E"/><g class="pupil"><circle cx="171" cy="66" r="3.4" fill="#0B231E"/><circle cx="173" cy="63.5" r="1.6" fill="#fff"/></g></g>
       <ellipse class="lid" cx="170" cy="66" rx="8.5" ry="8.5" fill="#5A4528"/>
+      <g class="carry"><path d="M196 76 C 214 70, 232 80, 252 70" fill="none" stroke="#7A5A2E" stroke-width="4" stroke-linecap="round"/><path d="M222 75 l5 -9 M236 76 l6 7 M246 72 l2 -8" fill="none" stroke="#9AA637" stroke-width="3" stroke-linecap="round"/></g>
     </g>
   </g>
 </svg>`;
   document.querySelectorAll('[data-bird]').forEach((el) => { el.innerHTML = BIRD; });
+  // every place the bird lands gets a small branch to stand on
+  document.querySelectorAll('[data-twig]').forEach((el) => el.insertAdjacentHTML('afterbegin', '<svg class="twig" data-frond="twig" viewBox="0 0 240 200" aria-hidden="true"></svg>'));
   if (!reduce) document.querySelectorAll('[data-assemble] .bird').forEach((b) => b.classList.add('assemble'));
 
   /* ---- royal palm fronds, generated leaflet by leaflet ---- */
@@ -68,6 +71,7 @@
       fruit(s);
     },
     perch: (s) => frond(s, 'M404 300 C 300 262, 160 250, -4 284', { stem: '#5A4528', cols: leaves, len: 62, w: 8, lw: 5, sway: true }),
+    twig: (s) => frond(s, 'M-50 177 C 30 170, 150 170, 280 186', { stem: '#5A4528', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 30, w: 6, lw: 4, step: 0.06, from: 0.08, sway: true }),
     bg: (s) => frond(s, 'M10 390 C 70 250, 190 140, 395 80', { stem: '#9AA637', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 96, w: 5, lw: 4, sway: true }),
   };
   document.querySelectorAll('svg[data-frond]').forEach((svg) => presets[svg.dataset.frond]?.(svg));
