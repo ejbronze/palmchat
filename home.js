@@ -34,7 +34,7 @@
   }));
   /* the nest: built a strand at a time, one per landing */
   const nest = document.getElementById('nest'), strandsG = document.getElementById('strands');
-  const spot = stage.querySelector('.nest-spot');
+  const spot = stage.querySelector('.nest-spot'), bowl = nest.querySelector('.bowl');
   const STRANDS = 14, strandEls = [];
   const browns = ['#5A4528', '#7A5A2E', '#4A3820', '#9AA637', '#6E5734', '#8A6A38'];
   for (let i = 0; i < STRANDS; i++) {
@@ -48,6 +48,7 @@
   const setNest = (n) => {
     strandEls.forEach((el, i) => { el.style.strokeDashoffset = i < n ? 0 : el.dataset.l; });
     nest.classList.toggle('started', n > 0); nest.classList.toggle('full', n >= STRANDS);
+    bowl.style.opacity = (n / STRANDS).toFixed(2);
   };
   if (root.classList.contains('static')) { spot.appendChild(nest); setNest(STRANDS); return; }
 

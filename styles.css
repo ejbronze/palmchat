@@ -448,6 +448,7 @@ footer .pad{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;p
 .nest{position:absolute;left:0;top:0;width:130px;z-index:15;pointer-events:none;will-change:transform}
 .nest svg{display:block;width:100%;height:auto;overflow:visible}
 .nest .cup{opacity:0;transition:opacity .6s}
+.nest .bowl{opacity:0;transition:opacity .6s}
 .nest.started .cup{opacity:1}
 .nest .strand{fill:none;stroke-linecap:round;transition:stroke-dashoffset .9s var(--ease)}
 .nest .friend{position:absolute;width:62%;aspect-ratio:1.2;top:-36%;opacity:0;transform:translateY(-30px) scale(.8);transition:opacity .5s var(--ease),transform .7s var(--ease)}

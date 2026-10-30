@@ -32,28 +32,42 @@
   if (!reduce) document.querySelectorAll('[data-assemble] .bird').forEach((b) => b.classList.add('assemble'));
 
   /* ---- royal palm fronds, generated leaflet by leaflet ---- */
+  /* A royal palm frond: an arching rachis with long, narrow leaflets that taper and droop.
+     Far-side leaflets sit behind the rachis in darker greens; near-side ones hang in front. */
   function frond(svg, d, o) {
-    const g = document.createElementNS(SVGNS, 'g');
-    const back = document.createElementNS(SVGNS, 'g');
-    const rach = document.createElementNS(SVGNS, 'path');
+    const mk = (n) => document.createElementNS(SVGNS, n);
+    const g = mk('g'), far = mk('g'), near = mk('g'), rach = mk('path');
     rach.setAttribute('d', d); rach.setAttribute('fill', 'none'); rach.setAttribute('stroke', o.stem);
     rach.setAttribute('stroke-width', o.w); rach.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(g); g.appendChild(back); g.appendChild(rach);
-    const L = rach.getTotalLength();
+    svg.appendChild(g); g.append(far, rach, near);
+    const L = rach.getTotalLength(), step = o.step || 0.022, farCols = o.far || ['#173F31', '#1E4D3A', '#245A3F'];
+    const theta = o.theta || 0.62, steps = 12;
     let i = 0;
-    for (let t = o.from || 0.04; t < 0.985; t += o.step || 0.026, i++) {
+    for (let t = o.from || 0.05; t < 0.985; t += step, i++) {
       const p = rach.getPointAtLength(t * L), q = rach.getPointAtLength(Math.min(L, t * L + 2));
-      const a = Math.atan2(q.y - p.y, q.x - p.x), len = o.len * Math.sin(Math.PI * Math.min(1, t * 1.12)) + 12;
-      for (const side of [-1, 1]) {
-        const ang = a + side * 1.05 + (side > 0 ? 0.35 : -0.15), droop = side > 0 ? 0.42 : 0.16;
-        const ex = p.x + Math.cos(ang) * len, ey = p.y + Math.sin(ang) * len + len * droop;
-        const leaf = document.createElementNS(SVGNS, 'path');
-        leaf.setAttribute('d', `M${p.x.toFixed(1)} ${p.y.toFixed(1)} Q${(p.x + Math.cos(ang) * len * 0.55).toFixed(1)} ${(p.y + Math.sin(ang) * len * 0.55).toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`);
-        leaf.setAttribute('fill', 'none'); leaf.setAttribute('stroke', o.cols[(i + (side > 0 ? 1 : 0)) % o.cols.length]);
-        leaf.setAttribute('stroke-width', o.lw); leaf.setAttribute('stroke-linecap', 'round');
+      const a = Math.atan2(q.y - p.y, q.x - p.x);
+      const prof = Math.pow(Math.sin(Math.PI * Math.min(1, 0.1 + t * 0.95)), 0.75);
+      const dirs = [a - theta, a + theta].sort((x, y) => Math.sin(x) - Math.sin(y)); // [up, down]
+      dirs.forEach((ang, k) => {
+        const isNear = k === 1, jitter = ((i * 37 + k * 11) % 7) / 7;
+        const len = o.len * (0.3 + 0.7 * prof) * (isNear ? 1 : 0.86) * (0.92 + jitter * 0.16);
+        const grav = (isNear ? 0.5 : 0.62) + jitter * 0.12, maxW = o.lw * (0.8 + prof * 0.35);
+        const dx = Math.cos(ang), dy = Math.sin(ang), left = [], right = [];
+        for (let n = 0; n <= steps; n++) {
+          const u = n / steps;
+          const cx = p.x + dx * len * u, cy = p.y + dy * len * u + grav * len * u * u;
+          const tx = dx * len, ty = dy * len + 2 * grav * len * u, tl = Math.hypot(tx, ty) || 1;
+          const w = maxW * Math.pow(Math.sin(Math.PI * Math.min(1, u * 1.08 + 0.02)), 0.55) * (1 - 0.45 * u);
+          const nx = -ty / tl * w / 2, ny = tx / tl * w / 2;
+          left.push(`${(cx + nx).toFixed(1)} ${(cy + ny).toFixed(1)}`); right.push(`${(cx - nx).toFixed(1)} ${(cy - ny).toFixed(1)}`);
+        }
+        const leaf = mk('path');
+        leaf.setAttribute('d', `M${left.join(' L')} L${right.reverse().join(' L')}Z`);
+        const cols = isNear ? o.cols : farCols;
+        leaf.setAttribute('fill', cols[(i + k) % cols.length]);
         if (o.sway && !reduce) { leaf.style.transformOrigin = `${p.x}px ${p.y}px`; leaf.style.animation = `sway ${2.8 + (i % 5) * 0.45}s ${-i * 0.12}s infinite ease-in-out alternate`; }
-        (side < 0 ? back : g).appendChild(leaf);
-      }
+        (isNear ? near : far).appendChild(leaf);
+      });
     }
   }
   const leaves = ['#2F7A58', '#3E8D63', '#9AA637', '#256B4C'];
@@ -66,13 +80,13 @@
   };
   const presets = {
     hero: (s) => {
-      frond(s, 'M-20 250 C 70 172, 170 124, 300 62', { stem: '#24493F', cols: ['#1C4F3C', '#24614A'], len: 44, w: 4, lw: 3.5, sway: true });
-      frond(s, 'M0 330 C 110 286, 250 276, 404 304', { stem: '#5A4528', cols: leaves, len: 70, w: 8, lw: 5, sway: true });
+      frond(s, 'M-20 236 C 60 170, 170 120, 310 70', { stem: '#24493F', cols: ['#1C4F3C', '#24614A', '#20573F'], far: ['#143A2D', '#18402F'], len: 70, w: 4, lw: 7 });
+      frond(s, 'M-6 322 C 100 280, 260 272, 410 300', { stem: '#5A4528', cols: leaves, len: 92, w: 8, lw: 10, sway: true });
       fruit(s);
     },
-    perch: (s) => frond(s, 'M404 300 C 300 262, 160 250, -4 284', { stem: '#5A4528', cols: leaves, len: 62, w: 8, lw: 5, sway: true }),
-    twig: (s) => frond(s, 'M-50 177 C 30 170, 150 170, 280 186', { stem: '#5A4528', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 30, w: 6, lw: 4, step: 0.06, from: 0.08, sway: true }),
-    bg: (s) => frond(s, 'M10 390 C 70 250, 190 140, 395 80', { stem: '#9AA637', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 96, w: 5, lw: 4, sway: true }),
+    perch: (s) => frond(s, 'M410 296 C 300 258, 150 250, -10 282', { stem: '#5A4528', cols: leaves, len: 84, w: 8, lw: 9.5, sway: true }),
+    twig: (s) => frond(s, 'M-40 176 C 40 168, 150 168, 280 184', { stem: '#5A4528', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 46, w: 5, lw: 6.5, step: 0.045, from: 0.07, sway: true }),
+    bg: (s) => frond(s, 'M10 390 C 70 250, 190 140, 395 80', { stem: '#9AA637', cols: ['#2F7A58', '#3E8D63', '#9AA637'], len: 120, w: 5, lw: 11, step: 0.026, sway: true }),
   };
   document.querySelectorAll('svg[data-frond]').forEach((svg) => presets[svg.dataset.frond]?.(svg));
 
