@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><title>PalmChat</title>
+<rect width="240" height="240" rx="48" fill="#0B231E"/>
+<path d="M30 196 C 90 180, 160 178, 214 190" fill="none" stroke="#9AA637" stroke-width="12" stroke-linecap="round"/>
+<g transform="translate(6 22)"><path d="M78 116 L18 150 L26 162 L44 158 L36 170 L50 168 L88 130 Z" fill="#4A3820"/>
+<path d="M74 112 C 72 80, 104 62, 140 66 C 168 70, 184 92, 176 120 C 168 148, 128 160, 98 150 C 82 144, 74 130, 74 112 Z" fill="#5A4528"/>
+<path d="M154 78 C 180 92, 182 124, 162 142 C 142 158, 108 156, 96 144 C 128 140, 154 120, 154 78 Z" fill="#F4E7C6"/><path d="M120 88 C 98 92, 80 110, 66 134 C 96 134, 128 122, 146 102 C 144 92, 132 86, 120 88 Z" fill="#9AA637"/><path d="M76 128 C 98 126, 122 116, 138 100" fill="none" stroke="#F2B632" stroke-width="3.4" stroke-linecap="round"/><circle cx="160" cy="70" r="27" fill="#5A4528"/><path d="M183 62 L214 72 L184 84 Z" fill="#F2D27A"/><circle cx="170" cy="66" r="9" fill="#B3261E"/><circle cx="171" cy="66" r="4.5" fill="#0B231E"/>
+<g stroke="#C9A35A" stroke-width="7" stroke-linecap="round"><path d="M120 152 l1 18"/><path d="M136 150 l3 18"/></g></g></svg>

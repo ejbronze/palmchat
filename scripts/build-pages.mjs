@@ -38,9 +38,9 @@ function shell({ section, title, description, path, body, home = false }) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${title}</title><meta name="description" content="${description}"><meta name="theme-color" content="#0B231E"><link rel="canonical" href="${canonical}">
-<link rel="icon" href="/assets/brand/favicon-v2.svg"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-v2.png">
+<link rel="icon" href="/assets/brand/favicon-v3.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-v3.png">
 <link rel="preload" href="/assets/fonts/geist-v1.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css">
-<meta property="og:type" content="website"><meta property="og:site_name" content="PalmChat Innovations"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://palmchat.io/assets/social/palmchat-preview-v2.png"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PalmChat Innovations"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://palmchat.io/assets/social/palmchat-preview-v3.png"><meta name="twitter:card" content="summary_large_image">
 </head><body class="${section ? 'pg-' + section : ''}"><a class="skip-link" href="#main-content">Skip to content</a>
 <header class="top pad"><a class="brand" href="/" aria-label="PalmChat Innovations home"><span class="mini" data-bird></span><span>PalmChat</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav"><span class="ml">Menu</span><span class="bars" aria-hidden="true"></span></button></header>
 <nav class="menu" id="site-nav" aria-label="Main navigation">

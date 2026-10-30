@@ -2,12 +2,12 @@
 
 ## Created and ready for review
 
-- [x] Refined palm-and-bird mark: `assets/brand/palmchat-mark-v2.svg`
-- [x] Horizontal wordmark: `assets/brand/palmchat-horizontal-v2.svg`
-- [x] Reverse wordmark: `assets/brand/palmchat-reverse-v2.svg`
-- [x] Compact SVG favicon: `assets/brand/favicon-v2.svg`
-- [x] Apple touch icon: `assets/brand/apple-touch-icon-v2.png`
-- [x] Social preview: `assets/social/palmchat-preview-v2.png` (1200×630)
+- [x] Cigua palmera mark (transparent, for documents and slides): `assets/brand/palmchat-mark-v3.svg`
+- [x] SVG favicon (bird on a dark tile): `assets/brand/favicon-v3.svg`
+- [x] Apple touch icon, 180×180: `assets/brand/apple-touch-icon-v3.png`
+- [x] Social preview, 1200×630 ("Make new tech make sense."): `assets/social/palmchat-preview-v3.png`
+- [x] Fonts: Geist and Geist Mono, self-hosted under the SIL Open Font License: `assets/fonts/`
+- Note: the v2 palm-and-bird wordmarks were retired with the redesign. The header wordmark is the live bird plus text.
 - [x] EJ founder monogram in HTML/CSS, distinct from the company logo
 - [x] Old decorative covers and obsolete brand raster assets removed
 
