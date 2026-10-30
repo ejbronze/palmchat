@@ -40,6 +40,11 @@
       "source": "/work/exact-path",
       "destination": "/work",
       "permanent": true
+    },
+    {
+      "source": "/work/cornell-tech",
+      "destination": "/work",
+      "permanent": true
     }
   ]
 }
